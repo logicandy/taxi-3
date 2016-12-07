@@ -1,9 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import RouterConfig from './RouterConfig';
 import './index.css';
 
+
 ReactDOM.render(
-  <App />,
+  <RouterConfig/>,
   document.getElementById('root')
 );
+
+
+
+
+
