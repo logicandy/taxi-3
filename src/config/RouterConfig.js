@@ -6,7 +6,7 @@ import Admin from '../components/Admin/Admin';
 import DriversOrder from '../components/Driver/DriversOreder/DriversOrder';
 import Dispatcher from '../components/Dispatcher/Dispatcher';
 
-export const RouterConfig = (
+const RouterConfig = (
   <Router history={browserHistory}>
     <Route path='/' component={OrderPage}/>
     <Route path='/signup' component={SignUp}/>
@@ -16,4 +16,5 @@ export const RouterConfig = (
   </Router>
 );
 
+export default RouterConfig;
 
