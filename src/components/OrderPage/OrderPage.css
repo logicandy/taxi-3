@@ -1,14 +1,10 @@
 .OrderPage {
-  text-align: center;
-}
-
-.OrderPage {
   height: 80px;
 }
 
 .OrderPage-header {
+  text-align: center;
   background-color: #222;
-  height: 150px;
   padding: 20px;
   color: white;
 }
