@@ -1,5 +1,5 @@
 import React from 'react';
-import OrderEditForm from './OrderForm.js';
+import OrderForm from './OrderForm.js';
 
 export default class AddOrderHandler extends React.Component {
 
@@ -18,7 +18,7 @@ export default class AddOrderHandler extends React.Component {
 
   render() {
     return (
-      <OrderEditForm
+      <OrderForm
         onSubmit={this.handleAddSubmit}
       />
     );

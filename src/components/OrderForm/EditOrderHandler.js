@@ -1,5 +1,5 @@
 import React from 'react';
-import OrderEditForm from './OrderForm.js';
+import OrderForm from './OrderForm.js';
 const json = require('./order.json');
 
 export default class EditOrderHandler extends React.Component {
@@ -31,7 +31,7 @@ export default class EditOrderHandler extends React.Component {
 
   render() {
     return (
-      <OrderEditForm
+      <OrderForm
         onSubmit={this.handleEditSubmit}
         order={this.state.order}
       />

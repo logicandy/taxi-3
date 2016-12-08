@@ -1,6 +1,6 @@
 import React from 'react';
-import EditOrderHandler from '../OrderEditForm/EditOrderHandler';
-import AddOrderHandler from '../OrderEditForm/AddOrderHandler';
+import EditOrderHandler from '../OrderForm/EditOrderHandler';
+import AddOrderHandler from '../OrderForm/AddOrderHandler';
 import './Dispatcher.css';
 
 

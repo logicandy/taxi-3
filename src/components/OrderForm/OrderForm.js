@@ -1,7 +1,7 @@
 import React from 'react';
 import './OrderForm.css';
 
-export default class OrderEditForm extends React.Component {
+export default class OrderForm extends React.Component {
 
   constructor() {
     super();
@@ -32,16 +32,16 @@ export default class OrderEditForm extends React.Component {
 
 
   handleChange(e) {
-    if(e.target.type =='checkbox'){
-      this.setState({[e.target.name]: !this.state.state});
+    if (e.target.type == 'checkbox') {
+      const oldValue = this.state.state;
+      this.setState({[e.target.name]: !oldValue});
     }
-    else{
+    else {
       this.setState({[e.target.name]: e.target.value});
     }
     console.log(this.state[e.target.name]);
 
   }
-
 
 
   render() {
@@ -81,7 +81,7 @@ export default class OrderEditForm extends React.Component {
           </datalist>
         </div>
         <div className="form-group">
-          <label className="form-label" placeholder="From">From</label>
+          <label className="form-label">From</label>
           <input
             name="from"
             className="form-input"
@@ -92,7 +92,7 @@ export default class OrderEditForm extends React.Component {
           />
         </div>
         <div className="form-group">
-          <label className="form-label" placeholder="From">To</label>
+          <label className="form-label">To</label>
           <input
             name="to"
             className="form-input"
@@ -103,7 +103,7 @@ export default class OrderEditForm extends React.Component {
           />
         </div>
         <div className="form-group">
-          <label className="form-label" placeholder="Price">Price &#8372;</label>
+          <label className="form-label">Price &#8372;</label>
           <input
             name="price"
             className="form-input"
