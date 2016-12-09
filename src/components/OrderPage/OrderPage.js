@@ -3,7 +3,7 @@ import logo from '../../logo.svg';
 import OrderForm from '../OrderForm/OrderForm';
 import './OrderPage.css';
 
-import  {blank, existing} from '../OrderForm/order';
+import  {blank, existing, existingCompleted} from '../OrderForm/order';
 
 class OrderPage extends Component {
 
@@ -37,7 +37,7 @@ class OrderPage extends Component {
           <h2>Welcome to Sloboda taxi</h2>
         </div>
         <OrderForm
-          order={blank}
+          order={existingCompleted}
           onSubmit={this.handleAddSubmit}
         />
       </div>

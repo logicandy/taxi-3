@@ -1,3 +1,11 @@
-.OrderForm{
+.OrderForm {
   margin: 0 auto;
+}
+
+.OrderForm input:required:invalid {
+  border-color: #e85600;
+}
+
+.OrderForm input:required:valid {
+  border-color: #32b643;
 }
