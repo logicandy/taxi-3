@@ -66,7 +66,7 @@ export default class OrderForm extends React.Component {
               <label className="form-label">Driver`s name </label>
               <input
                 required={true}
-                pattern="(\w+(\s)*)+"
+                pattern="^[a-zA-ZА-Яа-яЁёЇї\s]*$"
                 name="driver_id"
                 className="form-input"
                 type="text"
