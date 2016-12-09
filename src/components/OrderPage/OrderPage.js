@@ -1,12 +1,10 @@
-import React, {Component} from 'react';
-import logo from '../../logo.svg';
+import React from 'react';
 import OrderForm from '../OrderForm/OrderForm';
 import './OrderPage.css';
-
+import Header from '../Header/Header';
 import  {blank, existing, existingCompleted} from '../OrderForm/order';
 
-class OrderPage extends Component {
-
+class OrderPage extends React.Component {
 
   constructor() {
     super();
@@ -31,13 +29,12 @@ class OrderPage extends Component {
 
   render() {
     return (
-      <div className="OrderPage">
-        <div className="OrderPage-header">
-          <img src={logo} className="OrderPage" alt="logo"/>
-          <h2>Welcome to Sloboda taxi</h2>
-        </div>
+      <div>
+        <Header
+          text={'This is an order page'}
+        />
         <OrderForm
-          order={existingCompleted}
+          order={blank}
           onSubmit={this.handleAddSubmit}
         />
       </div>

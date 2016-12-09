@@ -6,9 +6,9 @@ import './App.css';
 export default class App extends React.Component {
   render() {
     return (
-      <main>
+      <div>
         {RouterConfig}
-      </main>
+      </div>
     );
   }
 }
