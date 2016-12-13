@@ -71,14 +71,13 @@ export default class SignUpForm extends React.Component {
             </i> Admin
           </label>
         </div>
-
         {
           isDriver ?
             <div className="form-group">
               <label className="form-label">Phone</label>
               <input
                 required={true}
-                pattern="\d+"
+                pattern="\d{3,15}"
                 name="phone"
                 className="form-input"
                 type="text"
@@ -109,7 +108,7 @@ export default class SignUpForm extends React.Component {
             onChange={this.handleChange}
           />
         </div>
-        <input className="btn btn-primary" type="submit" value="Submit"/>
+        <input className="btn btn-primary" type="submit" value="Sign up"/>
       </form>
     );
   }

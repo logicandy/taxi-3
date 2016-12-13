@@ -1,8 +1,7 @@
 import React from 'react';
 import SignUpForm from '../SignUpForm/SignUpForm';
 import Header from '../Header/Header';
-import './SignUpPage.css'
-
+import './SignUpPage.css';
 
 export default class SignUpPage extends React.Component {
 
@@ -27,9 +26,41 @@ export default class SignUpPage extends React.Component {
 
     this.setState({
       user: user
+    }, ()=> {
+      const toSend = {
+        phone: user.selectedRole === 'driver' ?
+          this.state.user.phone :
+          this.state.user.email,
+        password: this.state.user.password,
+      };
+
+      console.log(JSON.stringify(toSend));
+
+
+      fetch('http://localhost:7000/auth_user', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(toSend)
+
+      }).then((response) => {
+        if (response.ok) {
+          console.log('Logged in successfuly ', response);
+        }
+        else {
+          console.log('Invalid Username/Password');
+        }
+      })
+        .catch((error) => {
+          console.log('Request failed', error);
+        });
     });
-    console.log(this.state.user);
+
+
   }
+
 
   render() {
     return (

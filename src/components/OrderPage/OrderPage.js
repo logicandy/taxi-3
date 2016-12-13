@@ -24,7 +24,7 @@ class OrderPage extends React.Component {
     this.setState({
       ...order,
     });
-    alert(this.state.client_id);
+    console.log(this.state);
   }
 
   render() {
