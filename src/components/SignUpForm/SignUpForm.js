@@ -23,15 +23,11 @@ export default class SignUpForm extends React.Component {
   handleSubmit(e) {
 
     e.preventDefault();
-
+    const credentialProperty = this.state.selectedRole === 'driver' ? 'phone' : 'email';
     const user = {
-      password: this.state.password
+      password: this.state.password,
+      [credentialProperty]: this.state[credentialProperty]
     };
-
-    this.state.selectedRole === 'driver' ?
-      user['phone'] = this.state.phone :
-      user['email'] = this.state.email;
-
     this.props.onSubmit(user);
   }
 

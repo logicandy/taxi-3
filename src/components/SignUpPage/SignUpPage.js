@@ -4,14 +4,15 @@ import Header from '../Header/Header';
 import Error from '../ErrorVisualizator/ErrorVisualizator';
 import './SignUpPage.css';
 
+const UNEXPECTED_ERROR_MESSAGE = 'Unexpected error';
+const DATA_ERROR_MESSAGE = 'Invalid Username/password';
+
 export default class SignUpPage extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      user: {},
-      isAuthorizationFailed: false,
-      errorMessage: 'Unexpected error'
+      isAuthorizationFailed: false
     };
     this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
     this.closeErrorBox = this.closeErrorBox.bind(this);
@@ -19,30 +20,24 @@ export default class SignUpPage extends React.Component {
 
   handleSignUpSubmit(user) {
 
+    fetch('http://localhost:7000/auth_user', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
 
-    this.setState({
-      user: user
-    }, ()=> {
-
-      fetch('http://localhost:7000/auth_user', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.state.user)
-
-      }).then((response) => {
-        if (response.ok) {
-        }
-        else {
-          this.setState({
-            isAuthorizationFailed: true,
-            errorMessage: 'Invalid Username/password'
-          });
-        }
-      });
+    }).then((response) => {
+      if (response.ok) {
+      }
+      else {
+        this.setState({
+          isAuthorizationFailed: true,
+        });
+      }
     });
+
   }
 
   closeErrorBox() {
@@ -54,17 +49,13 @@ export default class SignUpPage extends React.Component {
   render() {
     return (
       <div>
-        <Header
-          text={'Sign up page'}
-        />
-        <SignUpForm
-          onSubmit={this.handleSignUpSubmit}
-        />
+        <Header text={'Sign up page'}/>
+        <SignUpForm onSubmit={this.handleSignUpSubmit}/>
         {
-          this.state.isAuthorizationFailed === true ?
+          this.state.isAuthorizationFailed ?
             <div id="error-block">
               <Error
-                text={this.state.errorMessage}
+                text={DATA_ERROR_MESSAGE}
                 close={this.closeErrorBox}
               />
             </div> :

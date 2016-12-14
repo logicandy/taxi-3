@@ -76,7 +76,7 @@ export default class OrderForm extends React.Component {
               />
             </div>
             :
-            <p>{''}</p>
+           null
         }
         <div className="form-group">
           <label className="form-label">From</label>
@@ -134,7 +134,7 @@ export default class OrderForm extends React.Component {
                 </label>
               </div>
             </div> :
-            <p>{''}</p>
+            null
         }
         <div className="form-group">
           <label className="form-label">Order description</label>
