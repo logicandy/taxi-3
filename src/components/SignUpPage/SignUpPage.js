@@ -9,13 +9,9 @@ export default class SignUpPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: {
-        selectedRole: 'driver',
-        email: '',
-        phone: '',
-        password: ''
-      },
-      isAuthorizationFailed: null
+      user: {},
+      isAuthorizationFailed: false,
+      errorMessage: 'Unexpected error'
     };
     this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
     this.closeErrorBox = this.closeErrorBox.bind(this);
@@ -28,9 +24,6 @@ export default class SignUpPage extends React.Component {
       user: user
     }, ()=> {
 
-      console.log(JSON.stringify(this.state.user));
-
-
       fetch('http://localhost:7000/auth_user', {
         method: 'POST',
         mode: 'no-cors',
@@ -41,26 +34,20 @@ export default class SignUpPage extends React.Component {
 
       }).then((response) => {
         if (response.ok) {
-          console.log('Logged in successfuly ', response);
         }
         else {
-          console.log('Invalid Username/Password');
           this.setState({
-            isAuthorizationFailed: true
+            isAuthorizationFailed: true,
+            errorMessage: 'Invalid Username/password'
           });
         }
-      })
-        .catch((error) => {
-          console.log('Request failed', error);
-        });
+      });
     });
-
-
   }
 
   closeErrorBox() {
     this.setState({
-      isAuthorizationFailed: null
+      isAuthorizationFailed: false
     });
   }
 
@@ -74,17 +61,15 @@ export default class SignUpPage extends React.Component {
           onSubmit={this.handleSignUpSubmit}
         />
         {
-          (this.state.isAuthorizationFailed === true) ?
+          this.state.isAuthorizationFailed === true ?
             <div id="error-block">
               <Error
-                text={'Invalid Username/Password'}
+                text={this.state.errorMessage}
                 close={this.closeErrorBox}
               />
-            </div>
-            :
-            <p>{''}</p>
+            </div> :
+            null
         }
-
       </div>
     );
   }
