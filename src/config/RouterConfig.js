@@ -1,7 +1,7 @@
 import React from 'react';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import OrderPage from '../components/OrderPage/OrderPage';
-import SignUp from '../components/SignUp/SignUp';
+import SignUp from '../components/SignUpPage/SignUpPage';
 import Admin from '../components/Admin/Admin';
 import DriversOrder from '../components/Driver/DriversOreder/DriversOrder';
 import Dispatcher from '../components/Dispatcher/Dispatcher';

@@ -3,3 +3,19 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+form {
+  margin: 3rem auto 1rem auto;
+  border-radius: .3rem;
+  padding: 2rem 4rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+form input:required:invalid {
+  border-color: #e85600;
+}
+
+form input:required:valid {
+  border-color: #32b643;
+}
+
