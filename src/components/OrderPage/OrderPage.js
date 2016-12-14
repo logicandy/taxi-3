@@ -2,7 +2,7 @@ import React from 'react';
 import OrderForm from '../OrderForm/OrderForm';
 import './OrderPage.css';
 import Header from '../Header/Header';
-import  {blank, existing, existingCompleted} from '../OrderForm/order';
+import  {blank, existing, existingCompleted} from '../../fixtures/order';
 
 class OrderPage extends React.Component {
 

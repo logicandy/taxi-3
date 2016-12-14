@@ -1,3 +1,9 @@
-.error-block {
-  width: 50%;
+.error-block.toast {
+  width: 35%;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.error-block-closed{
+  visibility: hidden;
 }

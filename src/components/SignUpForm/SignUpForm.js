@@ -6,10 +6,10 @@ export default class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedRole: this.props.user.selectedRole,
-      email: this.props.user.email,
-      phone: this.props.user.phone,
-      password: this.props.user.password
+      selectedRole: 'driver',
+      email: '',
+      phone: '',
+      password: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -17,21 +17,24 @@ export default class SignUpForm extends React.Component {
   };
 
   handleChange(e) {
-
-    (e.target.type === 'radio' ) ?
-      this.setState({
-        selectedRole: e.target.value
-      }) :
-      this.setState({[e.target.name]: e.target.value});
+    this.setState({[e.target.name]: e.target.value});
   }
 
   handleSubmit(e) {
+
     e.preventDefault();
-    this.props.onSubmit(this.state);
+    const isDriver = this.state.selectedRole === 'driver';
+    const user = {
+      [ isDriver ? 'phone' : 'email']: isDriver ?
+        this.state.phone :
+        this.state.email,
+      password: this.state.password
+    };
+    console.log(user);
+    this.props.onSubmit(user);
   }
 
   render() {
-    const isDriver = this.state.selectedRole === 'driver';
     return (
       <form className="column col-6"
             onSubmit={this.handleSubmit}>
@@ -40,7 +43,7 @@ export default class SignUpForm extends React.Component {
           <label className="form-radio">
             <input
               type="radio"
-              name="role"
+              name="selectedRole"
               value={'driver'}
               checked={this.state.selectedRole === 'driver'}
               onChange={this.handleChange}
@@ -51,7 +54,7 @@ export default class SignUpForm extends React.Component {
           <label className="form-radio">
             <input
               type="radio"
-              name="role"
+              name="selectedRole"
               value={'dispatcher'}
               checked={this.state.selectedRole === 'dispatcher'}
               onChange={this.handleChange}
@@ -62,7 +65,7 @@ export default class SignUpForm extends React.Component {
           <label className="form-radio">
             <input
               type="radio"
-              name="role"
+              name="selectedRole"
               value={'admin'}
               checked={this.state.selectedRole === 'admin'}
               onChange={this.handleChange}
@@ -72,12 +75,12 @@ export default class SignUpForm extends React.Component {
           </label>
         </div>
         {
-          isDriver ?
+          this.state.selectedRole === 'driver' ?
             <div className="form-group">
               <label className="form-label">Phone</label>
               <input
                 required={true}
-                pattern="\d{3,15}"
+                pattern="\d{5,10}"
                 name="phone"
                 className="form-input"
                 type="text"
