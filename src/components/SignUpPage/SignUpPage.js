@@ -3,6 +3,9 @@ import SignUpForm from '../SignUpForm/SignUpForm';
 import Header from '../Header/Header';
 import Error from '../ErrorVisualizator/ErrorVisualizator';
 import './SignUpPage.css';
+import api from '../../modules/api';
+import {browserHistory} from 'react-router';
+
 
 const UNEXPECTED_ERROR_MESSAGE = 'Unexpected error';
 const DATA_ERROR_MESSAGE = 'Invalid Username/password';
@@ -19,25 +22,15 @@ export default class SignUpPage extends React.Component {
   }
 
   handleSignUpSubmit(user) {
-
-    fetch('http://localhost:7000/auth_user', {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-
-    }).then((response) => {
-      if (response.ok) {
-      }
-      else {
+    api.login(user)
+      .then(() => {
+        browserHistory.push('/drivers/order');
+      })
+      .catch(() => {
         this.setState({
-          isAuthorizationFailed: true,
+          isAuthorizationFailed: true
         });
-      }
     });
-
   }
 
   closeErrorBox() {
