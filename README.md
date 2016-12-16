@@ -32,7 +32,7 @@ After all installations you will be able to run the app.
 For running the app in development mode, you need to type a command mentioned below:<br>
 
 ```sh
-process.env.REACT_APP_API_URI=http://localhost:8000 npm start
+REACT_APP_API_URI=http://localhost:8000 npm start
 ```
 
 the path `http://localhost:8000`, that assigned to `process.env.REACT_APP_API_URI` 
