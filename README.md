@@ -4,7 +4,7 @@
 
 
 **For successful running Taxi app on your machine**
-**You’ll need to have Node >= 6 and npm >= 3 on your local machine**.
+**you’ll need to have Node >= 6 and npm >= 3 on your local machine**.
 
 
 ### Installation
@@ -36,8 +36,7 @@ process.env.REACT_APP_API_URI=http://localhost:8000 npm start
 ```
 
 the path `http://localhost:8000`, that assigned to `process.env.REACT_APP_API_URI` 
- variable
- can be overwritten by your own path where server is running
+ variable, can be overwritten by your own path where server is running.
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
