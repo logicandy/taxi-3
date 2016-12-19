@@ -17,22 +17,22 @@
   font-size: large;
 }
 
-table {
-	margin: 0 auto;
-	border-collapse: collapse;
+.table {
+  margin: 0 auto;
+  border-collapse: collapse;
 }
 
-th, td {
-	width: 10%;
+.Table-header, .Table-cell {
+  width: 10%;
 }
 .Active{
-	color: green;
+  color: green;
 }
-.NonActive{
-	color: red;
+.Non-active{
+  color: red;
 }
-.orderid{
-	width: 6%;
-	color: blue;
-	text-decoration: underline;
+.Order-id{
+  width: 6%;
+  color: blue;
+  text-decoration: underline;
 }
