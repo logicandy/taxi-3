@@ -11,8 +11,10 @@ export default class OrderPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      message: '',
-      messageColor: 'green'
+      hint: {
+        message: '',
+        type: 'success'
+      }
     };
     this.handleAddSubmit = this.handleAddSubmit.bind(this);
     this.closeHintMessage = this.closeHintMessage.bind(this);
@@ -34,32 +36,34 @@ export default class OrderPage extends React.Component {
 
     api.createOrder(orderToSend).then((response) => {
       if (response.error) {
-        const errorMessage = {
-          phone: `Phone ${response.error.phone}`,
-          email: response.error.email
-        };
         this.setState({
-          message: errorMessage.phone || errorMessage.email,
-          messageColor: 'red'
+          hint: {
+            message: response.error.phone || response.error.email,
+            type: 'danger'
+          }
         })
       }
       else {
         this.setState({
-          message: response.result,
-          messageColor: 'green'
+          hint: {
+            message: response.result,
+            type: 'success'
+          }
         })
       }
     }).catch((err) => {
       this.setState({
-        message: err,
-        messageColor: 'red'
+        hint: {
+          message: err,
+          type: 'danger'
+        }
       })
     })
   }
 
   closeHintMessage() {
     this.setState({
-      message: ''
+      hint: {message: ''}
     });
   }
 
@@ -74,10 +78,10 @@ export default class OrderPage extends React.Component {
           onSubmit={this.handleAddSubmit}
         />
         {
-          this.state.message ?
+          this.state.hint.message ?
             <HintMessage
-              color={this.state.messageColor}
-              text={this.state.message}
+              color={this.state.hint.type}
+              text={this.state.hint.message}
               close={this.closeHintMessage}
             /> :
             null

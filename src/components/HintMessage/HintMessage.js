@@ -7,7 +7,7 @@ export default class HintMessage extends React.Component {
     return (
       <div>
         <div
-          className={this.props.color === 'green' ?
+          className={this.props.color === 'success' ?
             'hint-block  toast toast-success' :
             'hint-block  toast toast-danger'}>
           <button

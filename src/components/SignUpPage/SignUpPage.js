@@ -48,7 +48,7 @@ export default class SignUpPage extends React.Component {
           this.state.message ?
             <div id="error-block">
               <HintMessage
-                color='red'
+                color='danger'
                 text={this.state.message}
                 close={this.closeHintMessage}
               />
