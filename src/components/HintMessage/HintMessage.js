@@ -12,10 +12,8 @@ export default class HintMessage extends React.Component {
             'hint-block  toast toast-danger'}>
           <button
             className="btn btn-clear float-right"
-            onClick={this.props.close}>
-          </button>
-          <span className="icon icon-error_outline">
-          </span>
+            onClick={this.props.close}
+          />
           {this.props.hint.message}
         </div>
       </div>

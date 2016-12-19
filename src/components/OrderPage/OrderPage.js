@@ -11,13 +11,10 @@ export default class OrderPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      hint: {
-        message: '',
-        type: 'success'
-      }
+      hint: null
     };
     this.handleAddSubmit = this.handleAddSubmit.bind(this);
-    this.closeHintBox = this.closeHintBox.bind(this);
+    this.closeHint = this.closeHint.bind(this);
   }
 
   handleAddSubmit(order) {
@@ -35,35 +32,25 @@ export default class OrderPage extends React.Component {
     };
 
     api.createOrder(orderToSend).then((response) => {
-      if (response.error) {
-        this.setState({
-          hint: {
-            message: response.error.phone || response.error.email,
-            type: 'danger'
-          }
-        })
-      }
-      else {
-        this.setState({
-          hint: {
-            message: response.result,
-            type: 'success'
-          }
-        })
-      }
-    }).catch((err) => {
       this.setState({
         hint: {
-          message: err,
+          message: response.result,
+          type: 'success'
+        }
+      })
+    }).catch((error) => {
+      this.setState({
+        hint: {
+          message: error.email || error.phone,
           type: 'danger'
         }
       })
     })
   }
 
-  closeHintBox() {
+  closeHint() {
     this.setState({
-      hint: {message: ''}
+      hint: null
     });
   }
 
@@ -78,12 +65,11 @@ export default class OrderPage extends React.Component {
           onSubmit={this.handleAddSubmit}
         />
         {
-          this.state.hint.message ?
+          this.state.hint &&
             <HintMessage
               hint={this.state.hint}
-              close={this.closeHintBox}
-            /> :
-            null
+              close={this.closeHint}
+            />
         }
       </div>
     );

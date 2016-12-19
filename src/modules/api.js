@@ -2,7 +2,7 @@ import fetch from '../helpers/fetch';
 
 export default {
   login: (user) => {
-    return fetch(`${process.env.REACT_APP_API_URI}/auth_user`, {
+    return fetch(`${process.env.REACT_APP_API_URI}/auth_driver`, {
       method: 'post',
       body: user
     }).then((data) => {
