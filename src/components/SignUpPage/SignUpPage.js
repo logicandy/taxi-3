@@ -48,6 +48,7 @@ export default class SignUpPage extends React.Component {
           this.state.isAuthorizationFailed ?
             <div id="error-block">
               <Error
+                color='red'
                 text={DATA_ERROR_MESSAGE}
                 close={this.closeErrorBox}
               />

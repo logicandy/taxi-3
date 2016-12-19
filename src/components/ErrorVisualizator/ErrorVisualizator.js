@@ -7,7 +7,9 @@ export default class ErrorVisualizator extends React.Component {
     return (
       <div>
         <div
-          className='error-block  toast toast-danger'>
+          className={this.props.color === 'green' ?
+            'error-block  toast toast-success' :
+            'error-block  toast toast-danger'}>
           <button
             className="btn btn-clear float-right"
             onClick={this.props.close}>

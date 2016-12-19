@@ -21,6 +21,9 @@ export default class OrderForm extends React.Component {
       price: this.props.order.price ?
         this.props.order.price :
         '',
+      email: this.props.order.email ?
+        this.props.order.email :
+        '',
       state: this.props.order.state,
       comment: this.props.order.comment ?
         this.props.order.comment :
@@ -60,6 +63,17 @@ export default class OrderForm extends React.Component {
             value={this.state.client_id}
           />
         </div>
+        <div className="form-group">
+          <label className="form-label">Client Email</label>
+          <input
+            name="email"
+            className="form-input"
+            type="email"
+            placeholder="Email"
+            onChange={this.handleChange}
+            value={this.state.email}
+          />
+        </div>
         {
           isModifiedMode ?
             <div className="form-group">
@@ -76,7 +90,7 @@ export default class OrderForm extends React.Component {
               />
             </div>
             :
-           null
+            null
         }
         <div className="form-group">
           <label className="form-label">From</label>

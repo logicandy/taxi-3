@@ -9,6 +9,12 @@ export default {
       localStorage.setItem('auth_token', data.auth_token);
       return data;
     });
+  },
+  createOrder: (order) => {
+    return fetch(`${process.env.REACT_APP_API_URI}/orders`,{
+      method: 'post',
+      body: order
+    });
   }
 };
 
