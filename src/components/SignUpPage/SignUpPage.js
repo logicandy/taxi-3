@@ -1,7 +1,7 @@
 import React from 'react';
 import SignUpForm from '../SignUpForm/SignUpForm';
 import Header from '../Header/Header';
-import Error from '../ErrorVisualizator/ErrorVisualizator';
+import HintMessage from '../HintMessage/HintMessage';
 import './SignUpPage.css';
 import api from '../../modules/api';
 import {browserHistory} from 'react-router';
@@ -15,10 +15,10 @@ export default class SignUpPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      isAuthorizationFailed: false
+      message: ''
     };
     this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
-    this.closeErrorBox = this.closeErrorBox.bind(this);
+    this.closeHintMessage = this.closeHintMessage.bind(this);
   }
 
   handleSignUpSubmit(user) {
@@ -28,14 +28,14 @@ export default class SignUpPage extends React.Component {
       })
       .catch(() => {
         this.setState({
-          isAuthorizationFailed: true
+          message: DATA_ERROR_MESSAGE
         });
     });
   }
 
-  closeErrorBox() {
+  closeHintMessage() {
     this.setState({
-      isAuthorizationFailed: false
+      message: ''
     });
   }
 
@@ -45,12 +45,12 @@ export default class SignUpPage extends React.Component {
         <Header text={'Sign up page'}/>
         <SignUpForm onSubmit={this.handleSignUpSubmit}/>
         {
-          this.state.isAuthorizationFailed ?
+          this.state.message ?
             <div id="error-block">
-              <Error
+              <HintMessage
                 color='red'
-                text={DATA_ERROR_MESSAGE}
-                close={this.closeErrorBox}
+                text={this.state.message}
+                close={this.closeHintMessage}
               />
             </div> :
             null

@@ -1,15 +1,15 @@
 import React from 'react';
-import './ErrorVisualizator.css';
+import './HintMessage.css';
 
 
-export default class ErrorVisualizator extends React.Component {
+export default class HintMessage extends React.Component {
   render() {
     return (
       <div>
         <div
           className={this.props.color === 'green' ?
-            'error-block  toast toast-success' :
-            'error-block  toast toast-danger'}>
+            'hint-block  toast toast-success' :
+            'hint-block  toast toast-danger'}>
           <button
             className="btn btn-clear float-right"
             onClick={this.props.close}>

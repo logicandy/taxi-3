@@ -3,7 +3,7 @@ import OrderForm from '../OrderForm/OrderForm';
 import './OrderPage.css';
 import Header from '../Header/Header';
 import api from '../../modules/api';
-import Error from '../ErrorVisualizator/ErrorVisualizator';
+import HintMessage from '../HintMessage/HintMessage';
 import  {blank, existing, existingCompleted} from '../../fixtures/order';
 
 export default class OrderPage extends React.Component {
@@ -15,12 +15,12 @@ export default class OrderPage extends React.Component {
       messageColor: 'green'
     };
     this.handleAddSubmit = this.handleAddSubmit.bind(this);
-    this.closeErrorBox = this.closeErrorBox.bind(this);
+    this.closeHintMessage = this.closeHintMessage.bind(this);
   }
 
   handleAddSubmit(order) {
 
-    const customOrder = {
+    const orderToSend = {
       client: {
         phone: order.client_id,
         email: order.email
@@ -32,24 +32,32 @@ export default class OrderPage extends React.Component {
       }
     };
 
-    api.createOrder(customOrder).then((response) => {
-      (response.error) ?
+    api.createOrder(orderToSend).then((response) => {
+      if (response.error) {
+        const errorMessage = {
+          phone: `Phone ${response.error.phone}`,
+          email: response.error.email
+        };
         this.setState({
-          message: `Phone ${response.error.phone}` || response.error.email,
+          message: errorMessage.phone || errorMessage.email,
           messageColor: 'red'
-        }) :
+        })
+      }
+      else {
         this.setState({
           message: response.result,
           messageColor: 'green'
         })
+      }
     }).catch((err) => {
       this.setState({
-        message: err
+        message: err,
+        messageColor: 'red'
       })
     })
   }
 
-  closeErrorBox() {
+  closeHintMessage() {
     this.setState({
       message: ''
     });
@@ -67,14 +75,13 @@ export default class OrderPage extends React.Component {
         />
         {
           this.state.message ?
-            <Error
+            <HintMessage
               color={this.state.messageColor}
               text={this.state.message}
-              close={this.closeErrorBox}
+              close={this.closeHintMessage}
             /> :
             null
         }
-
       </div>
     );
   }

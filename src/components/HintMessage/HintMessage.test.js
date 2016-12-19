@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ErrorVisualizator from './ErrorVisualizator';
+import HintMessage from './HintMessage';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<ErrorVisualizator />, div);
+  ReactDOM.render(<HintMessage />, div);
 });

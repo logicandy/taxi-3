@@ -1,4 +1,4 @@
-.error-block.toast {
+.hint-block.toast {
   width: 35%;
   margin: 0 auto;
   cursor: pointer;
@@ -6,6 +6,6 @@
   text-align: center;
 }
 
-.error-block-closed{
+.hint-block-closed{
   visibility: hidden;
 }
