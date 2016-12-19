@@ -6,7 +6,7 @@ import api from '../../modules/api';
 import Error from '../ErrorVisualizator/ErrorVisualizator';
 import  {blank, existing, existingCompleted} from '../../fixtures/order';
 
-class OrderPage extends React.Component {
+export default class OrderPage extends React.Component {
 
   constructor() {
     super();
@@ -80,4 +80,4 @@ class OrderPage extends React.Component {
   }
 }
 
-export default OrderPage;
+
