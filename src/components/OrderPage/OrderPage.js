@@ -17,7 +17,7 @@ export default class OrderPage extends React.Component {
       }
     };
     this.handleAddSubmit = this.handleAddSubmit.bind(this);
-    this.closeHintMessage = this.closeHintMessage.bind(this);
+    this.closeHintBox = this.closeHintBox.bind(this);
   }
 
   handleAddSubmit(order) {
@@ -61,7 +61,7 @@ export default class OrderPage extends React.Component {
     })
   }
 
-  closeHintMessage() {
+  closeHintBox() {
     this.setState({
       hint: {message: ''}
     });
@@ -80,9 +80,8 @@ export default class OrderPage extends React.Component {
         {
           this.state.hint.message ?
             <HintMessage
-              color={this.state.hint.type}
-              text={this.state.hint.message}
-              close={this.closeHintMessage}
+              hint={this.state.hint}
+              close={this.closeHintBox}
             /> :
             null
         }

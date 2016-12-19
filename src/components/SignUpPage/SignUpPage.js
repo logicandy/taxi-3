@@ -15,10 +15,13 @@ export default class SignUpPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      message: ''
+      hint:{
+        message: '',
+        type: 'danger'
+      }
     };
     this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
-    this.closeHintMessage = this.closeHintMessage.bind(this);
+    this.closeHintBox = this.closeHintBox.bind(this);
   }
 
   handleSignUpSubmit(user) {
@@ -28,14 +31,18 @@ export default class SignUpPage extends React.Component {
       })
       .catch(() => {
         this.setState({
-          message: DATA_ERROR_MESSAGE
+          hint: {
+            message: DATA_ERROR_MESSAGE
+          }
         });
-    });
+      });
   }
 
-  closeHintMessage() {
+  closeHintBox() {
     this.setState({
-      message: ''
+      hint: {
+        message: ''
+      }
     });
   }
 
@@ -45,12 +52,11 @@ export default class SignUpPage extends React.Component {
         <Header text={'Sign up page'}/>
         <SignUpForm onSubmit={this.handleSignUpSubmit}/>
         {
-          this.state.message ?
+          this.state.hint.message ?
             <div id="error-block">
               <HintMessage
-                color='danger'
-                text={this.state.message}
-                close={this.closeHintMessage}
+                hint={this.state.hint}
+                close={this.closeHintBox}
               />
             </div> :
             null
