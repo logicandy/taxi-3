@@ -17,11 +17,6 @@
   font-size: large;
 }
 
-.table {
-  margin: 0 auto;
-  border-collapse: collapse;
-}
-
 .Table-header, .Table-cell {
   width: 10%;
 }
