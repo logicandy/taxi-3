@@ -1,0 +1,11 @@
+.hint-block.toast {
+  width: 35%;
+  margin: 0 auto;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.hint-block-closed{
+  visibility: hidden;
+}

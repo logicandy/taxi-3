@@ -1,13 +1,13 @@
-function rejectOnError(response) {
-  return response.ok
-    ? Promise.resolve(response)
-    : Promise.reject(new Error(response.statusText));
+function handleResponse(response) {
+  return response.json().then((data) => {
+    if (response.ok) {
+      return data;
+    }
+
+    throw data.error;
+  });
 }
 
-
-function parseAsJSON(response) {
-  return response.json()
-}
 
 export default function (...args) {
   const options = args[1];
@@ -27,6 +27,5 @@ export default function (...args) {
   };
 
   return fetch(args[0], {...defaults, ...options, ...after})
-    .then(rejectOnError)
-    .then(parseAsJSON);
+    .then(handleResponse);
 }
