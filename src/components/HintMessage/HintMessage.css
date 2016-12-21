@@ -6,6 +6,11 @@
   text-align: center;
 }
 
-.hint-block-closed{
+.hint-block-closed {
   visibility: hidden;
+}
+
+.hint .modal-container {
+  background: rgba(0, 0, 0, 0);
+  box-shadow: none;
 }

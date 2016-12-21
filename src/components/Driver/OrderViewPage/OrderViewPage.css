@@ -1,0 +1,18 @@
+.order-view--footer {
+  text-align: center;
+  margin: 1rem auto;
+}
+
+.order-view--back-button {
+  margin-right: 1rem;
+}
+
+.order-view--accept-button,
+.order-view--back-button {
+  margin-bottom: 1rem;
+}
+
+.order-view--back-button:hover {
+  color: #fff;
+}
+
