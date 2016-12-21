@@ -2,6 +2,8 @@ import React from 'react';
 import logo from '../../logo.svg';
 import './Orders.css';
 import OrdersList from './OrdersList.js';
+import {order1, order2, order3, order4}  from './orderslistinfo.js';
+
 
 export default class Orders extends React.Component {
   render() {
@@ -11,7 +13,7 @@ export default class Orders extends React.Component {
         <img src={logo} className="Orders" alt="logo"/>
         <h2>Welcome to Sloboda taxi</h2>
       </div>
-      <OrdersList />
+      <OrdersList source={[order1,order2,order3,order4]} />
       </div>
     );
   }

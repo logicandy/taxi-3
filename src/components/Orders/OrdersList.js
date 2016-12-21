@@ -1,8 +1,5 @@
 import React from 'react';
 import './Orders.css';
-import {order1, order2, order3, order4}  from './orderslistinfo.js';
-
-var array = [order1, order2, order3, order4];
 
 export default class OrdersList extends React.Component {
   constructor(props){
@@ -20,8 +17,8 @@ export default class OrdersList extends React.Component {
   };
   order(param) {
     return(
-      <tr>
-        <td id={param["id"]} className="Table-cell Order-id">{param["id"]}</td>
+      <tr id={param["id"]} key={param["id"]}>
+        <td className="Table-cell Order-id">{param["id"]}</td>
         {this.ifactive(param["state"])}
         <td className="Table-cell">{param["client_id"]}</td>
         <td className="Table-cell">{param["driver_id"]}</td>
@@ -34,7 +31,7 @@ export default class OrdersList extends React.Component {
       </tr>
     );
   };
-  orderlist() {
+  orderlist(orderdata) {
     return(
       <div className="Order-list">
         <table className="table table-striped table-hover">
@@ -53,7 +50,7 @@ export default class OrdersList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {array.map(this.order)}
+          {orderdata.map(this.order)}
         </tbody>
         </table>
       </div>
@@ -62,7 +59,7 @@ export default class OrdersList extends React.Component {
   render() {
     return(
       <div>
-        {this.orderlist()}
+        {this.orderlist(this.props.source)}
       </div>
     );
   }
