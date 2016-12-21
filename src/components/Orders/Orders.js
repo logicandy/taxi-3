@@ -10,10 +10,10 @@ export default class Orders extends React.Component {
     return (
       <div className="Orders">
       <div className="Orders-header">
-        <img src={logo} className="Orders" alt="logo"/>
+        <img src={logo} className="Orders-logo" alt="logo"/>
         <h2>Welcome to Sloboda taxi</h2>
       </div>
-      <OrdersList source={[order1,order2,order3,order4]} />
+      <OrdersList orders={[order1,order2,order3,order4]} />
       </div>
     );
   }

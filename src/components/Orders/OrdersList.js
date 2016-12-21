@@ -5,8 +5,7 @@ export default class OrdersList extends React.Component {
   constructor(props){
     super(props);
     this.ifactive = this.ifactive.bind(this);
-    this.order = this.order.bind(this);
-    this.orderlist = this.orderlist.bind(this);
+    this.displayorder = this.displayorder.bind(this);
   }
   ifactive(orderstate) {
     if(orderstate) {
@@ -15,23 +14,23 @@ export default class OrdersList extends React.Component {
       return(<td className="Table-cell Non-active">non-active</td>);
     }
   };
-  order(param) {
+  displayorder(orderdata) {
     return(
-      <tr id={param["id"]} key={param["id"]}>
-        <td className="Table-cell Order-id">{param["id"]}</td>
-        {this.ifactive(param["state"])}
-        <td className="Table-cell">{param["client_id"]}</td>
-        <td className="Table-cell">{param["driver_id"]}</td>
-        <td className="Table-cell">{param["from"]}</td>
-        <td className="Table-cell">{param["to"]}</td>
-        <td className="Table-cell">{param["price"]}</td>
-        <td className="Table-cell">{param["comment"]}</td>
-        <td className="Table-cell">{param["created_at"]}</td>
-        <td className="Table-cell">{param["updated_at"]}</td>
+      <tr id={orderdata.id} key={orderdata.id}>
+        <td className="Table-cell Order-id">{orderdata.id}</td>
+        {this.ifactive(orderdata.state)}
+        <td className="Table-cell">{orderdata.client_id}</td>
+        <td className="Table-cell">{orderdata.driver_id}</td>
+        <td className="Table-cell">{orderdata.from}</td>
+        <td className="Table-cell">{orderdata.to}</td>
+        <td className="Table-cell">{orderdata.price}</td>
+        <td className="Table-cell">{orderdata.comment}</td>
+        <td className="Table-cell">{orderdata.created_at}</td>
+        <td className="Table-cell">{orderdata.updated_at}</td>
       </tr>
     );
   };
-  orderlist(orderdata) {
+  render() {
     return(
       <div className="Order-list">
         <table className="table table-striped table-hover">
@@ -50,16 +49,9 @@ export default class OrdersList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {orderdata.map(this.order)}
+          {this.props.orders.map(this.displayorder)}
         </tbody>
         </table>
-      </div>
-    );
-  };
-  render() {
-    return(
-      <div>
-        {this.orderlist(this.props.source)}
       </div>
     );
   }
