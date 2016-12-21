@@ -1,5 +1,5 @@
 import React from 'react';
-import './Orders.css';
+import '../OrdersPage/OrdersPage.css';
 
 export default class OrdersList extends React.Component {
   constructor(props){

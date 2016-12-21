@@ -5,8 +5,7 @@ import SignUp from '../components/SignUpPage/SignUpPage';
 import Admin from '../components/Admin/Admin';
 import DriversOrder from '../components/Driver/DriversOrder/DriversOrder';
 import Dispatcher from '../components/Dispatcher/Dispatcher';
-import Orders from '../components/Orders/Orders';
-import OrderViewPage from '../components/Driver/OrderViewPage/OrderViewPage';
+import Orders from '../components/OrdersPage/OrdersPage';
 
 const RouterConfig = (
   <Router history={browserHistory}>

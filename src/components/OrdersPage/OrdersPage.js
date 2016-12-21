@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from '../../logo.svg';
-import './Orders.css';
-import OrdersList from './OrdersList.js';
-import {order1, order2, order3, order4}  from './orderslistinfo.js';
+import './OrdersPage.css';
+import OrdersList from '../OrdersList/OrdersList.js';
+import {order1, order2, order3, order4}  from '../../fixtures/orderslistinfo.js';
 
 
 export default class Orders extends React.Component {
