@@ -66,10 +66,10 @@ export default class OrderPage extends React.Component {
         />
         {
           this.state.hint &&
-            <HintMessage
-              hint={this.state.hint}
-              close={this.closeHint}
-            />
+          <HintMessage
+            hint={this.state.hint}
+            close={this.closeHint}
+          />
         }
       </div>
     );
