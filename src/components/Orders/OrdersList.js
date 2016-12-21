@@ -7,8 +7,8 @@ export default class OrdersList extends React.Component {
     this.ifactive = this.ifactive.bind(this);
     this.displayorder = this.displayorder.bind(this);
   }
-  ifactive(OrderState) {
-    if(OrderState) {
+  ifactive(orderstate) {
+    if(orderstate) {
       return(<td className="Table-cell Active">active</td>);
     } else {
       return(<td className="Table-cell Non-active">non-active</td>);
