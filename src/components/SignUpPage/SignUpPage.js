@@ -8,7 +8,7 @@ import {browserHistory} from 'react-router';
 
 
 const UNEXPECTED_ERROR_MESSAGE = 'Unexpected error';
-const DATA_ERROR_MESSAGE = 'Invalid Username/password';
+
 
 export default class SignUpPage extends React.Component {
 
@@ -23,19 +23,26 @@ export default class SignUpPage extends React.Component {
     this.closeHint = this.closeHint.bind(this);
   }
 
-  handleSignUpSubmit(user) {
-    api.login(user)
+  handleSignUpSubmit(user, role) {
+    api.login(user, role)
       .then(() => {
-        browserHistory.push('/drivers/order');
+        if (role === 'driver') {
+          browserHistory.push('/drivers/order');
+        }
+        if (role === 'admin') {
+          browserHistory.push('/admin');
+        }
+        else if (role === 'dispatcher') {
+          browserHistory.push('/dispatcher');
+        }
+      }).catch((error) => {
+      this.setState({
+        hint: {
+          message: error || UNEXPECTED_ERROR_MESSAGE,
+          type: 'danger'
+        }
       })
-      .catch(() => {
-        this.setState({
-          hint: {
-            message: DATA_ERROR_MESSAGE,
-            type: 'danger'
-          }
-        });
-      });
+    });
   }
 
   closeHint() {
@@ -51,10 +58,10 @@ export default class SignUpPage extends React.Component {
         <SignUpForm onSubmit={this.handleSignUpSubmit}/>
         {
           this.state.hint &&
-            <HintMessage
-              hint={this.state.hint}
-              close={this.closeHint}
-            />
+          <HintMessage
+            hint={this.state.hint}
+            close={this.closeHint}
+          />
         }
       </div>
     );

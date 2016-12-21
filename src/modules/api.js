@@ -1,8 +1,17 @@
 import fetch from '../helpers/fetch';
 
 export default {
-  login: (user) => {
-    return fetch(`${process.env.REACT_APP_API_URI}/auth_driver`, {
+  login: (user, role) => {
+
+    let path = 'auth_driver';
+    if (role === 'dispatcher') {
+      path = 'dispatchers'
+    }
+    else if (role === 'admin') {
+      path = 'auth_admin'
+    }
+
+    return fetch(`${process.env.REACT_APP_API_URI}/${path}`, {
       method: 'post',
       body: user
     }).then((data) => {
@@ -11,7 +20,7 @@ export default {
     });
   },
   createOrder: (order) => {
-    return fetch(`${process.env.REACT_APP_API_URI}/orders`,{
+    return fetch(`${process.env.REACT_APP_API_URI}/orders`, {
       method: 'post',
       body: order
     });

@@ -15,7 +15,7 @@ export default class HintMessage extends React.Component {
               className="btn btn-clear float-right"
               onClick={this.props.close}
             />
-            {this.props.hint.message}
+           <p>{this.props.hint.message}</p>
           </div>
         </div>
       </div>

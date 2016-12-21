@@ -4,7 +4,7 @@ function handleResponse(response) {
       return data;
     }
 
-    throw data.error;
+    throw data.error || data.errors;
   });
 }
 
