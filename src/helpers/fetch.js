@@ -8,7 +8,6 @@ function handleResponse(response) {
   });
 }
 
-
 export default function (...args) {
   const options = args[1];
   const token = localStorage.getItem('auth_token');

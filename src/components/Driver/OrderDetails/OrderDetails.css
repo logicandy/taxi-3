@@ -1,0 +1,25 @@
+.order-view {
+  width: 90%;
+  margin: 1rem auto auto auto;
+}
+
+.order-view--table {
+  margin: 0 auto;
+}
+
+.order-view .order-view--table th,
+.order-view .order-view--table td {
+  border-color: #5764c6;
+}
+
+.order-view .card .card-header {
+  background-color: #5764c6;
+  border-radius: .3rem;
+  color: #fff;
+  padding: 3rem 0 2rem 0;
+  text-align: center;
+}
+
+.order-view .card .card-title {
+  font-size: 3rem;
+}
