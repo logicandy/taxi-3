@@ -29,11 +29,11 @@ export default class SignUpPage extends React.Component {
         if (role === 'driver') {
           browserHistory.push('/drivers/order');
         }
-        if (role === 'dispatcher') {
-          browserHistory.push('/dispatcher');
-        }
-        else if (role === 'admin') {
+        if (role === 'admin') {
           browserHistory.push('/admin');
+        }
+        else if (role === 'dispatcher') {
+          browserHistory.push('/dispatcher');
         }
       }).catch((error) => {
       this.setState({
