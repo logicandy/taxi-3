@@ -17,9 +17,7 @@ export default {
     });
   },
   getOrder: (id) => {
-    return fetch(`${process.env.REACT_APP_API_URI}/orders:${id}`,{
-      method: 'get'
-    });
+    return fetch(`${process.env.REACT_APP_API_URI}/orders/${id}`);
   },
 };
 
