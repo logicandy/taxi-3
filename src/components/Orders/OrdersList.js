@@ -7,26 +7,26 @@ export default class OrdersList extends React.Component {
     this.ifactive = this.ifactive.bind(this);
     this.displayorder = this.displayorder.bind(this);
   }
-  ifactive(orderstate) {
-    if(orderstate) {
+  ifactive(OrderState) {
+    if(OrderState) {
       return(<td className="Table-cell Active">active</td>);
     } else {
       return(<td className="Table-cell Non-active">non-active</td>);
     }
   };
-  displayorder(orderdata) {
+  displayorder(Order) {
     return(
-      <tr id={orderdata.id} key={orderdata.id}>
-        <td className="Table-cell Order-id">{orderdata.id}</td>
-        {this.ifactive(orderdata.state)}
-        <td className="Table-cell">{orderdata.client_id}</td>
-        <td className="Table-cell">{orderdata.driver_id}</td>
-        <td className="Table-cell">{orderdata.from}</td>
-        <td className="Table-cell">{orderdata.to}</td>
-        <td className="Table-cell">{orderdata.price}</td>
-        <td className="Table-cell">{orderdata.comment}</td>
-        <td className="Table-cell">{orderdata.created_at}</td>
-        <td className="Table-cell">{orderdata.updated_at}</td>
+      <tr id={Order.id} key={Order.id}>
+        <td className="Table-cell Order-id">{Order.id}</td>
+        {this.ifactive(Order.state)}
+        <td className="Table-cell">{Order.client_id}</td>
+        <td className="Table-cell">{Order.driver_id}</td>
+        <td className="Table-cell">{Order.from}</td>
+        <td className="Table-cell">{Order.to}</td>
+        <td className="Table-cell">{Order.price}</td>
+        <td className="Table-cell">{Order.comment}</td>
+        <td className="Table-cell">{Order.created_at}</td>
+        <td className="Table-cell">{Order.updated_at}</td>
       </tr>
     );
   };
