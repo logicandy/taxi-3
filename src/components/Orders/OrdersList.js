@@ -14,19 +14,19 @@ export default class OrdersList extends React.Component {
       return(<td className="Table-cell Non-active">non-active</td>);
     }
   };
-  displayorder(Order) {
+  displayorder(order) {
     return(
-      <tr id={Order.id} key={Order.id}>
-        <td className="Table-cell Order-id">{Order.id}</td>
-        {this.ifactive(Order.state)}
-        <td className="Table-cell">{Order.client_id}</td>
-        <td className="Table-cell">{Order.driver_id}</td>
-        <td className="Table-cell">{Order.from}</td>
-        <td className="Table-cell">{Order.to}</td>
-        <td className="Table-cell">{Order.price}</td>
-        <td className="Table-cell">{Order.comment}</td>
-        <td className="Table-cell">{Order.created_at}</td>
-        <td className="Table-cell">{Order.updated_at}</td>
+      <tr id={order.id} key={order.id}>
+        <td className="Table-cell Order-id">{order.id}</td>
+        {this.ifactive(order.state)}
+        <td className="Table-cell">{order.client_id}</td>
+        <td className="Table-cell">{order.driver_id}</td>
+        <td className="Table-cell">{order.from}</td>
+        <td className="Table-cell">{order.to}</td>
+        <td className="Table-cell">{order.price}</td>
+        <td className="Table-cell">{order.comment}</td>
+        <td className="Table-cell">{order.created_at}</td>
+        <td className="Table-cell">{order.updated_at}</td>
       </tr>
     );
   };
