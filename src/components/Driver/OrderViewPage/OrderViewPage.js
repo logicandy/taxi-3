@@ -2,8 +2,8 @@ import React from 'react';
 import './OrderViewPage.css';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import {browserHistory} from 'react-router';
-import  {blank, existing, existingCompleted} from '../../../fixtures/order';
-import api from '../../../modules/api';
+import  {blank, order, existingCompleted} from '../../../fixtures/orders';
+
 
 export default class OrderViewPage extends React.Component {
   constructor() {
@@ -11,20 +11,21 @@ export default class OrderViewPage extends React.Component {
     this.state = {
       order: null
     };
+
     this.backToOrders = this.backToOrders.bind(this);
   }
 
   componentWillMount() {
- /*   api.getOrder(this.props.params.id).then((order)=> {
+   /* api.getOrder(this.props.params.id).then((order)=> {
       this.setState({
         order: order
       });
-    });
-*/
+    });*/
+
     this.setState({
       order: {
         order_id: this.props.params.id,
-        ...existing
+        ...order
       }
     });
 

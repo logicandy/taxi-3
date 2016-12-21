@@ -4,7 +4,7 @@ import './OrderPage.css';
 import Header from '../Header/Header';
 import api from '../../modules/api';
 import HintMessage from '../HintMessage/HintMessage';
-import  {blank, existing, existingCompleted} from '../../fixtures/order';
+import  {blank, existing, existingCompleted} from '../../fixtures/orders';
 
 export default class OrderPage extends React.Component {
 
