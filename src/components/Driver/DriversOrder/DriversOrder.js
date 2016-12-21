@@ -6,7 +6,7 @@ import {Link} from 'react-router';
 export default class DriversOrder extends React.Component {
   render() {
     return (
-        <div>
+      <div>
         <Header
           text={'Drivers orders'}
         />

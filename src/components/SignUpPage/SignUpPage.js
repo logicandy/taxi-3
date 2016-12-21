@@ -1,48 +1,53 @@
 import React from 'react';
 import SignUpForm from '../SignUpForm/SignUpForm';
 import Header from '../Header/Header';
-import Error from '../ErrorVisualizator/ErrorVisualizator';
+import HintMessage from '../HintMessage/HintMessage';
 import './SignUpPage.css';
+import api from '../../modules/api';
+import {browserHistory} from 'react-router';
+
 
 const UNEXPECTED_ERROR_MESSAGE = 'Unexpected error';
-const DATA_ERROR_MESSAGE = 'Invalid Username/password';
+
 
 export default class SignUpPage extends React.Component {
 
   constructor() {
     super();
+
     this.state = {
-      isAuthorizationFailed: false
+      hint: null
     };
+
     this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
-    this.closeErrorBox = this.closeErrorBox.bind(this);
+    this.closeHint = this.closeHint.bind(this);
   }
 
-  handleSignUpSubmit(user) {
-
-    fetch('http://localhost:7000/auth_user', {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-
-    }).then((response) => {
-      if (response.ok) {
-      }
-      else {
-        this.setState({
-          isAuthorizationFailed: true,
-        });
-      }
+  handleSignUpSubmit(user, role) {
+    api.login(user, role)
+      .then(() => {
+        if (role === 'driver') {
+          browserHistory.push('/drivers/order');
+        }
+        if (role === 'admin') {
+          browserHistory.push('/admin');
+        }
+        else if (role === 'dispatcher') {
+          browserHistory.push('/dispatcher');
+        }
+      }).catch((error) => {
+      this.setState({
+        hint: {
+          message: error || UNEXPECTED_ERROR_MESSAGE,
+          type: 'danger'
+        }
+      })
     });
-
   }
 
-  closeErrorBox() {
+  closeHint() {
     this.setState({
-      isAuthorizationFailed: false
+      hint: null
     });
   }
 
@@ -52,14 +57,11 @@ export default class SignUpPage extends React.Component {
         <Header text={'Sign up page'}/>
         <SignUpForm onSubmit={this.handleSignUpSubmit}/>
         {
-          this.state.isAuthorizationFailed ?
-            <div id="error-block">
-              <Error
-                text={DATA_ERROR_MESSAGE}
-                close={this.closeErrorBox}
-              />
-            </div> :
-            null
+          this.state.hint &&
+          <HintMessage
+            hint={this.state.hint}
+            close={this.closeHint}
+          />
         }
       </div>
     );
