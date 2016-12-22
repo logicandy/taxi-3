@@ -1,7 +1,9 @@
 import faker from 'faker';
+import fakerNL from 'faker/locale/nl';
+
 
 export const order = {
-  client_id: faker.phone.phoneNumberFormat(),
+  client_id: fakerNL.phone.phoneNumberFormat(1),
   driver_id: faker.random.number(),
   from: faker.address.streetAddress(),
   to: faker.address.streetAddress(),
@@ -13,15 +15,15 @@ export const order = {
 };
 
 export const existingCompleted = {
-  "client_id": faker.phone.phoneNumber(),
-  "driver_id": faker.random.number(),
-  "from": faker.address.streetAddress(),
-  "to": faker.address.streetAddress(),
-  "state": true,
-  "price": faker.commerce.price(),
-  "comment": faker.lorem.paragraph(),
-  "created_at": faker.date.future(),
-  "updated_at": faker.date.future()
+  client_id: fakerNL.phone.phoneNumberFormat(1),
+  driver_id: faker.random.number(),
+  from: faker.address.streetAddress(),
+  to: faker.address.streetAddress(),
+  state: true,
+  price: faker.commerce.price(),
+  comment: faker.lorem.paragraph(),
+  created_at: faker.date.future(),
+  updated_at: faker.date.future(),
 };
 
 
