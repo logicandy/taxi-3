@@ -28,5 +28,8 @@ export default {
   getOrder: (id) => {
     return fetch(`${process.env.REACT_APP_API_URI}/orders/${id}`);
   },
+  getOrdersList: () =>{
+    return fetch(`${process.env.REACT_APP_API_URI}/orders`,{method: 'get'});
+  }
 };
 
