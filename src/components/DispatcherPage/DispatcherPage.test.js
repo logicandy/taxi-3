@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Dispatcher from './Dispatcher';
+import DispatcherPage from './DispatcherPage';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Dispatcher />, div);
+  ReactDOM.render(<DispatcherPage />, div);
 });
