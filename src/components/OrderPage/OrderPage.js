@@ -13,6 +13,7 @@ export default class OrderPage extends React.Component {
     this.state = {
       hint: null
     };
+
     this.handleAddSubmit = this.handleAddSubmit.bind(this);
     this.closeHint = this.closeHint.bind(this);
   }
@@ -61,7 +62,7 @@ export default class OrderPage extends React.Component {
           text={'This is an order page'}
         />
         <OrderForm
-          order={order}
+          order={blank}
           onSubmit={this.handleAddSubmit}
         />
         {

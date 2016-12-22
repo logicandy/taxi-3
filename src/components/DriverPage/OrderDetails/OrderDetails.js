@@ -8,7 +8,7 @@ export default class OrderDetails extends React.Component {
       <div className="order-view">
         <div className="card">
           <div className="card-header">
-            <h2 className="card-title">Order {order.order_id}</h2>
+            <h2 className="card-title">Order {order.id}</h2>
           </div>
           <div className="card-body">
             <table className="order-view--table table table-striped table-hover">
