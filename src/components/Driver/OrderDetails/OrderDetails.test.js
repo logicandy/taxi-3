@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import OrderDetails from './OrderDetails';
-import  {blank, existing, existingCompleted} from '../../../fixtures/order';
+import  {blank, existing, existingCompleted} from '../../../fixtures/orders';
 
 const testOrder = {
   order_id: 12,
