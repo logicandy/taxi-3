@@ -1,0 +1,33 @@
+.Orders {
+  text-align: center;
+}
+
+.Orders-logo {
+  height: 80px;
+}
+
+.Orders-header {
+  background-color: #222;
+  height: 180px;
+  padding: 20px;
+  color: white;
+}
+
+.Orders-intro {
+  font-size: large;
+}
+
+.Table-header, .Table-cell {
+  width: 10%;
+}
+.Active{
+  color: green;
+}
+.Non-active{
+  color: red;
+}
+.Order-id{
+  width: 6%;
+  color: blue;
+  text-decoration: underline;
+}

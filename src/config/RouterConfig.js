@@ -5,7 +5,9 @@ import SignUp from '../components/SignUpPage/SignUpPage';
 import Admin from '../components/Admin/Admin';
 import DriversOrder from '../components/Driver/DriversOrder/DriversOrder';
 import Dispatcher from '../components/Dispatcher/Dispatcher';
+import Orders from '../components/OrdersPage/OrdersPage';
 import OrderViewPage from '../components/Driver/OrderViewPage/OrderViewPage';
+
 
 const RouterConfig = (
   <Router history={browserHistory}>
@@ -17,6 +19,7 @@ const RouterConfig = (
       <Route path="order/:id" component={OrderViewPage}/>
     </Route>
     <Route path='/dispatcher' component={Dispatcher}/>
+    <Route path='/orders' component={Orders}/>
   </Router>
 );
 
