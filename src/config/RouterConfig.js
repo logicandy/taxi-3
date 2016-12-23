@@ -1,24 +1,24 @@
 import React from 'react';
 import {Router, Route, browserHistory} from 'react-router'
 import OrderPage from '../components/OrderPage/OrderPage';
-import SignUp from '../components/SignUpPage/SignUpPage';
-import Admin from '../components/Admin/Admin';
-import DriversOrder from '../components/Driver/DriversOrder/DriversOrder';
-import Dispatcher from '../components/Dispatcher/Dispatcher';
+import SignUpPage from '../components/SignUpPage/SignUpPage/SignUpPage';
+import AdminPage from '../components/AdminPage/AdminPage';
+import DriverPage from '../components/DriverPage/DriverPage/DriverPage';
+import DispatcherPage from '../components/DispatcherPage/DispatcherPage';
 import Orders from '../components/OrdersPage/OrdersPage';
-import OrderViewPage from '../components/Driver/OrderViewPage/OrderViewPage';
+import OrderViewPage from '../components/DriverPage/OrderViewPage/OrderViewPage';
 
 
 const RouterConfig = (
   <Router history={browserHistory}>
     <Route path='/' component={OrderPage}/>
-    <Route path='/signup' component={SignUp}/>
-    <Route path='/admin' component={Admin}/>
+    <Route path='/signup' component={SignUpPage}/>
+    <Route path='/admin' component={AdminPage}/>
     <Route path='/drivers'>
-      <Route path='order' component={DriversOrder}/>
+      <Route path='order' component={DriverPage}/>
       <Route path="order/:id" component={OrderViewPage}/>
     </Route>
-    <Route path='/dispatcher' component={Dispatcher}/>
+    <Route path='/dispatcher' component={DispatcherPage}/>
     <Route path='/orders' component={Orders}/>
   </Router>
 );

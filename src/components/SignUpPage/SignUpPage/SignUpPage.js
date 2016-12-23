@@ -1,9 +1,9 @@
 import React from 'react';
 import SignUpForm from '../SignUpForm/SignUpForm';
-import Header from '../Header/Header';
-import HintMessage from '../HintMessage/HintMessage';
+import Header from '../../Header/Header';
+import HintMessage from '../../HintMessage/HintMessage';
 import './SignUpPage.css';
-import api from '../../modules/api';
+import api from '../../../modules/api';
 import {browserHistory} from 'react-router';
 
 

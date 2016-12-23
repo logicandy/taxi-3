@@ -3,7 +3,7 @@ import Header from '../../Header/Header';
 import {Link} from 'react-router';
 
 
-export default class DriversOrder extends React.Component {
+export default class DriverPage extends React.Component {
   render() {
     return (
       <div>

@@ -2,23 +2,27 @@ import React from 'react';
 import '../OrdersPage/OrdersPage.css';
 
 export default class OrdersList extends React.Component {
-  constructor(props){
+
+  constructor(props) {
     super(props);
-    this.ifactive = this.ifactive.bind(this);
-    this.displayorder = this.displayorder.bind(this);
+
+    this.ifActive = this.ifActive.bind(this);
+    this.displayOrder = this.displayOrder.bind(this);
   }
-  ifactive(orderstate) {
-    if(orderstate) {
-      return(<td className="Table-cell Active">active</td>);
+
+  ifActive(orderState) {
+    if (orderState) {
+      return (<td className="Table-cell Active">active</td>);
     } else {
-      return(<td className="Table-cell Non-active">non-active</td>);
+      return (<td className="Table-cell Non-active">non-active</td>);
     }
   };
-  displayorder(order) {
-    return(
-      <tr id={order.id} key={order.id}>
+
+  displayOrder(order) {
+    return (
+      <tr key={order.id}>
         <td className="Table-cell Order-id">{order.id}</td>
-        {this.ifactive(order.state)}
+        {this.ifActive(order.state)}
         <td className="Table-cell">{order.client_id}</td>
         <td className="Table-cell">{order.driver_id}</td>
         <td className="Table-cell">{order.from}</td>
@@ -30,11 +34,12 @@ export default class OrdersList extends React.Component {
       </tr>
     );
   };
+
   render() {
-    return(
+    return (
       <div className="Order-list">
         <table className="table table-striped table-hover">
-        <thead>
+          <thead>
           <tr>
             <th className="Table-header Order-id">Order ID</th>
             <th className="Table-header">State</th>
@@ -47,10 +52,10 @@ export default class OrdersList extends React.Component {
             <th className="Table-header">Created at</th>
             <th className="Table-header">Updated at</th>
           </tr>
-        </thead>
-        <tbody>
-          {this.props.orders.map(this.displayorder)}
-        </tbody>
+          </thead>
+          <tbody>
+          {this.props.orders.map(this.displayOrder)}
+          </tbody>
         </table>
       </div>
     );

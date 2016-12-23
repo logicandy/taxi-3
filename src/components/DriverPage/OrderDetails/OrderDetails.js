@@ -14,6 +14,10 @@ export default class OrderDetails extends React.Component {
             <table className="order-view--table table table-striped table-hover">
               <tbody>
               <tr>
+                <th>Date</th>
+                <td>{order.created_at}</td>
+              </tr>
+              <tr>
                 <th>Client Phone</th>
                 <td>{order.client_id}</td>
               </tr>
