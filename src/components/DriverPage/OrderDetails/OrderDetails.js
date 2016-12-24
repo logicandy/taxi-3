@@ -2,6 +2,17 @@ import React from 'react';
 import './OrderDetails.css';
 
 export default class OrderDetails extends React.Component {
+  constructor(props){
+    super(props);
+    this.formatDate = this.formatDate.bind(this);
+  }
+
+  formatDate(date){
+    const start = date.indexOf('T')+1;
+    const end = date.indexOf('.');
+    return date.slice(start, end);
+  }
+
   render() {
     const {order} = this.props;
     return (
@@ -14,8 +25,8 @@ export default class OrderDetails extends React.Component {
             <table className="order-view--table table table-striped table-hover">
               <tbody>
               <tr>
-                <th>Date</th>
-                <td>{order.created_at}</td>
+                <th>Time of creation</th>
+                <td>{this.formatDate(order.created_at)}</td>
               </tr>
               <tr>
                 <th>Client Phone</th>

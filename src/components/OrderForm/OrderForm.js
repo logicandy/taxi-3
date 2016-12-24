@@ -54,7 +54,7 @@ export default class OrderForm extends React.Component {
           <label className="form-label">Client Phone</label>
           <input
             required={true}
-            pattern="\d+"
+            pattern="\d{10}"
             name="client_id"
             className="form-input"
             type="text"

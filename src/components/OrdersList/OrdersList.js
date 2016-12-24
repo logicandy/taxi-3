@@ -1,5 +1,6 @@
 import React from 'react';
-import '../OrdersPage/OrdersPage.css';
+import './OrdersList.css';
+import {ordersArray}  from '../../fixtures/orders.js';
 
 export default class OrdersList extends React.Component {
 
@@ -54,7 +55,7 @@ export default class OrdersList extends React.Component {
           </tr>
           </thead>
           <tbody>
-          {this.props.orders.map(this.displayOrder)}
+          {ordersArray.map(this.displayOrder)}
           </tbody>
         </table>
       </div>

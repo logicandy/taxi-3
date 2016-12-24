@@ -6,6 +6,9 @@ import api from '../../modules/api';
 import HintMessage from '../HintMessage/HintMessage';
 import  {blank, order, existingCompleted} from '../../fixtures/orders';
 
+const UNEXPECTED_ERROR_MESSAGE = 'Unexpected error';
+const SUCCESS = 'Order was added';
+
 export default class OrderPage extends React.Component {
 
   constructor() {
@@ -35,14 +38,15 @@ export default class OrderPage extends React.Component {
     api.createOrder(orderToSend).then((response) => {
       this.setState({
         hint: {
-          message: response.result,
+          message: SUCCESS,
           type: 'success'
         }
       })
     }).catch((error) => {
+      console.log(error);
       this.setState({
         hint: {
-          message: error.email || error.phone,
+          message: error.email || error.phone || UNEXPECTED_ERROR_MESSAGE,
           type: 'danger'
         }
       })

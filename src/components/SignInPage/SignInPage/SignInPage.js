@@ -1,10 +1,9 @@
 import React from 'react';
-import SignUpForm from '../SignUpForm/SignUpForm';
+import SignUpForm from '../SignInForm/SignInForm';
 import Header from '../../Header/Header';
 import HintMessage from '../../HintMessage/HintMessage';
-import './SignUpPage.css';
+import './SignInPage.css';
 import api from '../../../modules/api';
-import {browserHistory} from 'react-router';
 
 
 const UNEXPECTED_ERROR_MESSAGE = 'Unexpected error';
@@ -24,25 +23,15 @@ export default class SignUpPage extends React.Component {
   }
 
   handleSignUpSubmit(user, role) {
-    api.login(user, role)
-      .then(() => {
-        if (role === 'driver') {
-          browserHistory.push('/drivers/order');
-        }
-        if (role === 'admin') {
-          browserHistory.push('/admin');
-        }
-        else if (role === 'dispatcher') {
-          browserHistory.push('/dispatcher');
-        }
-      }).catch((error) => {
-      this.setState({
-        hint: {
-          message: error || UNEXPECTED_ERROR_MESSAGE,
-          type: 'danger'
-        }
-      })
-    });
+    api.signIn(user, role)
+      .catch((error) => {
+        this.setState({
+          hint: {
+            message: error || UNEXPECTED_ERROR_MESSAGE,
+            type: 'danger'
+          }
+        })
+      });
   }
 
   closeHint() {
@@ -54,7 +43,7 @@ export default class SignUpPage extends React.Component {
   render() {
     return (
       <div>
-        <Header text={'Sign up page'}/>
+        <Header text={'Sign in page'}/>
         <SignUpForm onSubmit={this.handleSignUpSubmit}/>
         {
           this.state.hint &&

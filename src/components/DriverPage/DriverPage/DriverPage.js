@@ -11,9 +11,9 @@ export default class DriverPage extends React.Component {
           text={'Drivers orders'}
         />
         <ul>
-          <li><Link to="/drivers/order/1">order1</Link></li>
-          <li><Link to="/drivers/order/2">order2</Link></li>
-          <li><Link to="/drivers/order/3">order3</Link></li>
+          <li><Link to="/driver/order/1">order1</Link></li>
+          <li><Link to="/driver/order/2">order2</Link></li>
+          <li><Link to="/driver/order/3">order3</Link></li>
         </ul>
       </div>
     );

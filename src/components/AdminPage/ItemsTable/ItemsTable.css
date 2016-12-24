@@ -1,0 +1,7 @@
+.table-row__active:hover {
+  cursor: pointer;
+}
+
+.table--head {
+  text-transform: uppercase;
+}

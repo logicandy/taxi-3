@@ -43,7 +43,7 @@ export const blank = {
 
 export const ordersArray = ((length) => {
 
-  let orders = [];
+  const orders = [];
 
   for (let i = 0; i < length; i++) {
 

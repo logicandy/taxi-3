@@ -21,7 +21,7 @@ export default class OrderViewPage extends React.Component {
     this.closeHint = this.closeHint.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     api.getOrder(this.props.params.id)
       .then((order) => {
         this.setState({
@@ -33,9 +33,10 @@ export default class OrderViewPage extends React.Component {
   acceptOrder() {
     api.acceptOrderByDriver(this.props.params.id)
       .then((response) => {
+        console.log(response);
         this.setState({
           hint: {
-            message: `You successfully accepted an order ${response.current_order}`,
+            message: `You successfully accepted an order ${response.current_order.id}`,
             type: 'success'
           }
         })
@@ -51,7 +52,7 @@ export default class OrderViewPage extends React.Component {
   }
 
   backToOrders() {
-    browserHistory.push('/drivers/order');
+    browserHistory.push('/driver');
   }
 
   closeHint() {

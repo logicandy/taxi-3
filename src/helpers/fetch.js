@@ -3,7 +3,6 @@ function handleResponse(response) {
     if (response.ok) {
       return data;
     }
-
     throw data.error || data.errors;
   });
 }
