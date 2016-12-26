@@ -7,10 +7,16 @@ export default class TableList extends React.Component {
     super(props);
 
     this.onRowClick = this.onRowClick.bind(this);
+    this.formatDate = this.formatDate.bind(this);
   }
 
   onRowClick(id) {
     this.props.rowClickHandler(id);
+  }
+
+  formatDate(date){
+    const end = date.indexOf('.');
+    return date.slice(0, end).replace(/T/, ' at ');
   }
 
   render() {
@@ -27,7 +33,7 @@ export default class TableList extends React.Component {
             <table className="table table-striped table-hover">
               <thead className="table--head">
               <tr>
-                {headlines.map((headline)=><th key={headline}>{headline}</th>)}
+                {headlines.map((headline)=><th key={headline}>{headline.replace(/_/g, ' ')}</th>)}
               </tr>
               </thead>
               <tbody>
@@ -39,7 +45,10 @@ export default class TableList extends React.Component {
                       key={`tr-${item.id}`}
                       className="table-row__active">
                       {
-                        headlines.map((headline)=><td key={headline}>{item[headline]}</td>)
+                        headlines.map((headline)=> {
+                          const isDate = headline === 'created_at' || headline === 'updated_at';
+                          return <td key={headline}>{isDate? this.formatDate(item[headline]): item[headline].toString()}</td>
+                        })
                       }
                     </tr>)
                 })

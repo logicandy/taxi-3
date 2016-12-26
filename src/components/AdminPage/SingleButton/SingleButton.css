@@ -1,0 +1,9 @@
+.block-button--danger.btn.btn-primary {
+  background: rgb(232, 86, 0);
+  border-color: rgb(222, 82, 0);
+}
+
+.block-button--danger.btn.btn-primary:hover {
+  background: rgb(244, 95, 0);
+  border-color: rgb(222, 82, 0);
+}

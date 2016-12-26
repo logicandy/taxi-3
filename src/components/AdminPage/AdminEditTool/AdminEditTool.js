@@ -4,16 +4,19 @@ import OrderForm from '../../OrderForm/OrderForm';
 import UserForm from '../../UsersForm/UsersForm';
 import HintMessage from '../../HintMessage/HintMessage';
 import {MESSAGES} from '../../../constants/messages';
+import BlockButton from '../SingleButton/SingleButton';
 import {browserHistory} from 'react-router';
 
 
 export default class AdminEditTool extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       entityItem: null
     };
 
+    this.blockUser = this.blockUser.bind(this);
     this.closeHint = this.closeHint.bind(this);
     this.handleEditSubmit = this.handleEditSubmit.bind(this);
   }
@@ -39,7 +42,9 @@ export default class AdminEditTool extends React.Component {
             type: 'success'
           }
         });
-        setTimeout(() => { browserHistory.push(`/admin/${this.props.params.entity}`) }, 1000);
+        setTimeout(() => {
+          browserHistory.push(`/admin/${this.props.params.entity}`)
+        }, 1000);
       })
       .catch(() => {
         this.setState({
@@ -49,6 +54,10 @@ export default class AdminEditTool extends React.Component {
           }
         });
       });
+  }
+
+  blockUser(){
+    console.log('user blocked');
   }
 
   closeHint() {
@@ -70,20 +79,28 @@ export default class AdminEditTool extends React.Component {
                 order={this.state.entityItem.order}
                 onSubmit={this.handleEditSubmit}
               /> :
-              <UserForm
-                mode={'edit'}
-                entity={this.props.params.entity}
-                user={this.state.entityItem}
-                onSubmit={this.handleEditSubmit}
-              /> :
+              <div>
+                <BlockButton
+                  handler={this.blockUser}
+                  isDanger={true}
+                  text={`Block user`}
+                />
+                <UserForm
+                  mode={'edit'}
+                  entity={this.props.params.entity}
+                  user={this.state.entityItem}
+                  onSubmit={this.handleEditSubmit}
+                />
+              </div>
+            :
             null
         }{
-          this.state.hint &&
-          <HintMessage
-            hint={this.state.hint}
-            close={this.closeHint}
-          />
-        }
+        this.state.hint &&
+        <HintMessage
+          hint={this.state.hint}
+          close={this.closeHint}
+        />
+      }
       </div>
     );
   }

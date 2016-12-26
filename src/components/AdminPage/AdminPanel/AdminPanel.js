@@ -19,7 +19,7 @@ export default class AdminPanel extends React.Component {
                   className={`tab-item ${activeTab === tab ? 'active' : ''}`}>
                 <Link
                   to={`/admin/${tab.url}`}>
-                  {tab.name}
+                  <span>{tab.name}</span>
                 </Link>
               </li>
             ))

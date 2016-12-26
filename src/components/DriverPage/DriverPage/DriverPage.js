@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../../Header/Header';
 import {Link, browserHistory} from 'react-router';
-import ItemsTable from '../../ItemsTable/ItemsTable';
+import ItemsList from '../../ItemsTable/ItemsTable';
 import api from '../../../modules/api';
 import OrderView from '../OrderViewPage/OrderViewPage';
 import  {blank, order, existingCompleted} from '../../../fixtures/orders';

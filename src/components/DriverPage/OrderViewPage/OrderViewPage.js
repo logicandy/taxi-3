@@ -41,12 +41,14 @@ export default class OrderViewPage extends React.Component {
   acceptOrder() {
     api.acceptOrderByDriver(this.props.params.id)
       .then((response) => {
+
         this.setState({
           hint: {
             message: `You successfully accepted an order ${response.current_order.id}`,
             type: 'success'
           },
-        })
+        });
+        browserHistory.push('/driver/')
       })
       .catch(() => {
         this.setState({
@@ -73,7 +75,6 @@ export default class OrderViewPage extends React.Component {
     }
     else {
       this.acceptOrder();
-      setTimeout(() => { browserHistory.push('/driver/') }, 1000);
     }
   }
 
