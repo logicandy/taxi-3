@@ -24,7 +24,6 @@ export default class DriverPage extends React.Component {
   componentDidMount() {
     api.driverGetOrders()
       .then((response) => {
-
         const currentDriverId = response.driver_id;
         const driverOrders = response.orders.map((item)=> {
           if (item.driver_id === currentDriverId && item.state === 'active') {
@@ -32,7 +31,6 @@ export default class DriverPage extends React.Component {
               activeOrder: item
             })
           }
-
           return Object.assign({}, {
             id: item.id,
             from: item.from,
@@ -40,6 +38,7 @@ export default class DriverPage extends React.Component {
             comment: item.comment,
           })
         });
+
         this.setState({
           orders: driverOrders
         })

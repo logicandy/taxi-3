@@ -14,7 +14,7 @@ export default class TableList extends React.Component {
     this.props.rowClickHandler(id);
   }
 
-  formatDate(date){
+  formatDate(date) {
     const end = date.indexOf('.');
     return date.slice(0, end).replace(/T/, ' at ');
   }
@@ -47,7 +47,11 @@ export default class TableList extends React.Component {
                       {
                         headlines.map((headline)=> {
                           const isDate = headline === 'created_at' || headline === 'updated_at';
-                          return <td key={headline}>{isDate? this.formatDate(item[headline]): item[headline].toString()}</td>
+                          return <td key={headline}>{isDate ? this.formatDate(item[headline]) :
+                            item[headline] === null ?
+                              ' ' :
+                              item[headline].toString()}
+                          </td>
                         })
                       }
                     </tr>)

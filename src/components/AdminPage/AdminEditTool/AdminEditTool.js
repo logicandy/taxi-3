@@ -33,7 +33,6 @@ export default class AdminEditTool extends React.Component {
   }
 
   handleEditSubmit(entity) {
-    console.log(entity);
     api.adminUpdateEntity(this.props.params.entity, this.props.params.id, entity)
       .then(() => {
         this.setState({
@@ -56,8 +55,24 @@ export default class AdminEditTool extends React.Component {
       });
   }
 
-  blockUser(){
-    console.log('user blocked');
+  blockUser() {
+    api.adminUpdateEntity(this.props.params.entity, this.props.params.id, {blocked: true})
+      .then(() => {
+        this.setState({
+          hint: {
+            message: MESSAGES.ADMIN.BLOCKED,
+            type: 'success'
+          }
+        });
+      })
+      .catch(() => {
+        this.setState({
+          hint: {
+            message: MESSAGES.ADMIN.ERROR,
+            type: 'danger'
+          }
+        });
+      });
   }
 
   closeHint() {

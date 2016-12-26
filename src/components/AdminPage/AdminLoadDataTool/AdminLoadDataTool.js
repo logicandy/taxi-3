@@ -10,7 +10,7 @@ export default class AdminEditTool extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      entityData: null
+      entityData: null,
     };
 
     this.handleOrderAdding = this.handleOrderAdding.bind(this);
@@ -21,7 +21,7 @@ export default class AdminEditTool extends React.Component {
     api.adminGetData(this.props.entityToLoad)
       .then((data) => {
         this.setState({
-          entityData: data,
+          entityData: data.orders || data,
         })
       })
   }

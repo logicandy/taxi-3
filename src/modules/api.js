@@ -72,12 +72,9 @@ export default {
       body: body,
     };
 
-    //put will be created on server later
     if (entity === 'drivers' || entity === 'dispatchers') {
-      params = {
-        method: 'post',
-        body: {[entity === 'drivers' ? 'driver' : 'dispatcher']: body},
-      }
+      params.body = {[entity === 'drivers' ? 'driver' : 'dispatcher']: body};
+
     }
     return fetch(ROUTES.ADMIN_ROUTES.UPDATE[entity](id), params);
   },

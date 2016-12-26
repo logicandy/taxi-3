@@ -11,5 +11,6 @@ export const MESSAGES = {
     UPDATE: (entity) => `${entity} was successfully updated`,
     ERROR: `Something bad happened with server`,
     CREATE: (entity) => `${entity} was creates`,
+    BLOCKED: `This user was blocked`,
   },
 };
