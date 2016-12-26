@@ -6,7 +6,6 @@ import './AdminPanel.css'
 
 export default class AdminPanel extends React.Component {
 
-
   render() {
     const entity = this.props.entity;
     const activeTab = TABS.find(t => t.url === entity);
@@ -17,8 +16,7 @@ export default class AdminPanel extends React.Component {
           {
             TABS.map(tab => (
               <li key={tab.name}
-                  className={`tab-item ${activeTab === tab ? 'active' : ''}`}
-              >
+                  className={`tab-item ${activeTab === tab ? 'active' : ''}`}>
                 <Link
                   to={`/admin/${tab.url}`}>
                   {tab.name}

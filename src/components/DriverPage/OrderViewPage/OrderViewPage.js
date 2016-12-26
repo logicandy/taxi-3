@@ -2,7 +2,6 @@ import React from 'react';
 import './OrderViewPage.css';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import {browserHistory} from 'react-router';
-import  {blank, order, existingCompleted} from '../../../fixtures/orders';
 import HintMessage from '../../HintMessage/HintMessage';
 import api from '../../../modules/api';
 
@@ -16,29 +15,37 @@ export default class OrderViewPage extends React.Component {
       hint: null,
     };
 
-    this.backToOrders = this.backToOrders.bind(this);
+    this.handleLeftButton = this.handleLeftButton.bind(this);
+    this.handleRightButton = this.handleRightButton.bind(this);
     this.acceptOrder = this.acceptOrder.bind(this);
     this.closeHint = this.closeHint.bind(this);
+    this.buttonText = this.buttonText.bind(this);
   }
 
   componentDidMount() {
-    api.getOrder(this.props.params.id)
-      .then((order) => {
-        this.setState({
-          order: order
-        });
-      })
+    if (this.props.activeOrder) {
+      this.setState({
+        order: this.props.activeOrder
+      });
+    }
+    else {
+      api.getOrder(this.props.params.id)
+        .then((order) => {
+          this.setState({
+            order: order
+          });
+        })
+    }
   }
 
   acceptOrder() {
     api.acceptOrderByDriver(this.props.params.id)
       .then((response) => {
-        console.log(response);
         this.setState({
           hint: {
             message: `You successfully accepted an order ${response.current_order.id}`,
             type: 'success'
-          }
+          },
         })
       })
       .catch(() => {
@@ -51,8 +58,33 @@ export default class OrderViewPage extends React.Component {
       });
   }
 
-  backToOrders() {
-    browserHistory.push('/driver');
+  handleLeftButton() {
+    if (this.props.leftButtonHandler) {
+      this.props.leftButtonHandler();
+    }
+    else {
+      browserHistory.push('/driver/');
+    }
+  }
+
+  handleRightButton() {
+    if (this.props.rightButtonHandler) {
+      this.props.rightButtonHandler();
+    }
+    else {
+      this.acceptOrder();
+      setTimeout(() => { browserHistory.push('/driver/') }, 1000);
+    }
+  }
+
+  buttonText(button) {
+    if (this.props.buttonsText) {
+      return (button === 'left') ? this.props.buttonsText.left : this.props.buttonsText.right;
+    }
+    else {
+      return (button === 'left') ? 'Back to orders' : 'Accept order';
+
+    }
   }
 
   closeHint() {
@@ -72,14 +104,14 @@ export default class OrderViewPage extends React.Component {
         }
         <div className="order-view--footer">
           <button
-            onClick={this.backToOrders}
+            onClick={this.handleLeftButton}
             className="btn order-view--back-button">
-            Back to orders
+            {this.buttonText('left')}
           </button>
           <button
-            onClick={this.acceptOrder}
+            onClick={this.handleRightButton}
             className="btn btn-primary order-view--accept-button">
-            Accept order
+            {this.buttonText('right')}
           </button>
         </div>
         {

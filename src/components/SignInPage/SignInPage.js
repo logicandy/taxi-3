@@ -1,9 +1,9 @@
 import React from 'react';
-import SignUpForm from '../SignInForm/SignInForm';
-import Header from '../../Header/Header';
-import HintMessage from '../../HintMessage/HintMessage';
+import SignUpForm from '../UsersForm/UsersForm';
+import Header from '../Header/Header';
+import HintMessage from '../HintMessage/HintMessage';
 import './SignInPage.css';
-import api from '../../../modules/api';
+import api from '../../modules/api';
 
 
 const UNEXPECTED_ERROR_MESSAGE = 'Unexpected error';
@@ -18,11 +18,11 @@ export default class SignUpPage extends React.Component {
       hint: null
     };
 
-    this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
+    this.handleSignInSubmit = this.handleSignInSubmit.bind(this);
     this.closeHint = this.closeHint.bind(this);
   }
 
-  handleSignUpSubmit(user, role) {
+  handleSignInSubmit(user, role) {
     api.signIn(user, role)
       .catch((error) => {
         this.setState({
@@ -44,7 +44,9 @@ export default class SignUpPage extends React.Component {
     return (
       <div>
         <Header text={'Sign in page'}/>
-        <SignUpForm onSubmit={this.handleSignUpSubmit}/>
+        <SignUpForm
+          user={''}
+          onSubmit={this.handleSignInSubmit}/>
         {
           this.state.hint &&
           <HintMessage
