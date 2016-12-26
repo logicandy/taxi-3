@@ -2,6 +2,7 @@ import React from 'react';
 import './DispatcherPage.css';
 import Header from '../Header/Header';
 import OrdersList from '../OrdersList/OrdersList';
+import DispatcherTabs from '../DispatcherTabs/DispatcherTabs'
 import {ordersArray}  from '../../fixtures/orders.js';
 
 export default class Dispatcher extends React.Component {
@@ -11,9 +12,7 @@ export default class Dispatcher extends React.Component {
         <Header
           text={'Dispatcher page'}
         />
-        <OrdersList
-          orders={ordersArray}
-        />
+        <DispatcherTabs />
       </div>
     );
   }

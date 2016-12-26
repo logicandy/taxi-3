@@ -3,7 +3,7 @@ import fetch from '../helpers/fetch';
 export default {
   login: (user, role) => {
 
-    let path = 'drivers';
+    let path = 'auth_driver';
     if (role === 'dispatcher') {
       path = 'dispatchers'
     }
@@ -26,17 +26,18 @@ export default {
     });
   },
   getOrder: (id) => {
-    return fetch(`${process.env.REACT_APP_API_URI}/orders/${id}`, {
-      method: 'get'
-    }).then((orderObj) => {
-      return orderObj.order;
-    });
+    return fetch(`${process.env.REACT_APP_API_URI}/orders/${id}`);
   },
   acceptOrderByDriver: (id) => {
     return fetch(`${process.env.REACT_APP_API_URI}/orders/${id}`, {
       method: 'put'
     });
   },
-
+  getOrdersList: () =>{
+    return fetch(`${process.env.REACT_APP_API_URI}/orders`,{method: 'get'});
+  },
+  getDriversList: () =>{
+    return fetch(`${process.env.REACT_APP_API_URI}/dispatchers/index_driver`,{method: 'get'});
+  },
 };
 

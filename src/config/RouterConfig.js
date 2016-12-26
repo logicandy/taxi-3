@@ -7,6 +7,8 @@ import DriverPage from '../components/DriverPage/DriverPage/DriverPage';
 import DispatcherPage from '../components/DispatcherPage/DispatcherPage';
 import Orders from '../components/OrdersPage/OrdersPage';
 import OrderViewPage from '../components/DriverPage/OrderViewPage/OrderViewPage';
+import DispatcherTabs from '../components/DispatcherTabs/DispatcherTabs';
+import DriversList from '../components/DriversList/DriversList'
 
 
 const RouterConfig = (

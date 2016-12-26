@@ -1,0 +1,13 @@
+.Table-header, .Table-cell {
+  width: 10%;
+}
+.Active{
+  color: green;
+}
+.Non-active{
+  color: red;
+}
+.Driver-id{
+  color: blue;
+  text-decoration: underline;
+}
