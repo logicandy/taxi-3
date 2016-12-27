@@ -4,6 +4,7 @@ import OrderDetails from '../OrderDetails/OrderDetails';
 import {browserHistory} from 'react-router';
 import HintMessage from '../../HintMessage/HintMessage';
 import api from '../../../modules/api';
+import {MESSAGES} from '../../../constants/messages';
 
 
 export default class OrderViewPage extends React.Component {
@@ -35,25 +36,32 @@ export default class OrderViewPage extends React.Component {
             order: order
           });
         })
+        .catch(() => {
+          this.setState({
+            hint: {
+              message: MESSAGES.UNEXPECTED_ERROR_MESSAGE,
+              type: 'danger'
+            }
+          });
+        })
     }
   }
 
   acceptOrder() {
     api.acceptOrderByDriver(this.props.params.id)
       .then((response) => {
-
         this.setState({
           hint: {
-            message: `You successfully accepted an order ${response.current_order.id}`,
+            message: MESSAGES.ORDERS.ACCEPT(response.current_order.id),
             type: 'success'
           },
         });
-        browserHistory.push('/driver/')
+        setTimeout(() => browserHistory.push('/driver/'), 1000);
       })
       .catch(() => {
         this.setState({
           hint: {
-            message: 'Something bad happened on the server',
+            message: MESSAGES.UNEXPECTED_ERROR_MESSAGE,
             type: 'danger'
           }
         });
@@ -84,7 +92,6 @@ export default class OrderViewPage extends React.Component {
     }
     else {
       return (button === 'left') ? 'Back to orders' : 'Accept order';
-
     }
   }
 
@@ -106,12 +113,12 @@ export default class OrderViewPage extends React.Component {
         <div className="order-view--footer">
           <button
             onClick={this.handleLeftButton}
-            className="btn order-view--back-button">
+            className="btn order-view--left-button">
             {this.buttonText('left')}
           </button>
           <button
             onClick={this.handleRightButton}
-            className="btn btn-primary order-view--accept-button">
+            className="btn order-view--right-button">
             {this.buttonText('right')}
           </button>
         </div>

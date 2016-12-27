@@ -4,9 +4,7 @@ import Header from '../Header/Header';
 import HintMessage from '../HintMessage/HintMessage';
 import './SignInPage.css';
 import api from '../../modules/api';
-
-
-const UNEXPECTED_ERROR_MESSAGE = 'Unexpected error';
+import {MESSAGES} from '../../constants/messages';
 
 
 export default class SignUpPage extends React.Component {
@@ -27,7 +25,7 @@ export default class SignUpPage extends React.Component {
       .catch((error) => {
         this.setState({
           hint: {
-            message: error || UNEXPECTED_ERROR_MESSAGE,
+            message: error || MESSAGES.UNEXPECTED_ERROR_MESSAGE,
             type: 'danger'
           }
         })

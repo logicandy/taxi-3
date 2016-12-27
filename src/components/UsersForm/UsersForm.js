@@ -7,23 +7,17 @@ export default class UsersForm extends React.Component {
     super(props);
     this.state = {
       selectedRole: this.props.entity ?
-        this.props.entity
-        : 'drivers',
+        this.props.entity : 'drivers',
       email: this.props.user.email ?
-        this.props.user.email :
-        '',
+        this.props.user.email : '',
       phone: this.props.user.phone ?
-        this.props.user.phone :
-        '',
+        this.props.user.phone : '',
       password: this.props.user.password ?
-        this.props.user.password :
-        '',
+        this.props.user.password : '',
       name: this.props.user.name ?
-        this.props.user.name :
-        '',
+        this.props.user.name : '',
       auto: this.props.user.auto ?
-        this.props.user.auto :
-        '',
+        this.props.user.auto : '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -42,15 +36,21 @@ export default class UsersForm extends React.Component {
     const credentialProperty = role === 'drivers' ? 'phone' : 'email';
 
     if (this.props.mode) {
-      const user = {
-        name: this.state.name,
-        [credentialProperty]: this.state[credentialProperty]
-      };
-      const auto = role === 'drivers' ? {auto: this.state.auto} : {};
-      const creation = this.props.mode ==='create'?  {password: this.state.password}:{};
-      Object.assign(user, auto, creation);
+      if (role === 'clients') {
 
-      this.props.onSubmit(user)
+        this.props.onSubmit({phone: this.state.phone, email: this.state.email});
+      }
+      else {
+        const user = {
+          name: this.state.name,
+          [credentialProperty]: this.state[credentialProperty]
+        };
+        const auto = role === 'drivers' ? {auto: this.state.auto} : {};
+        const creation = this.props.mode === 'create' ? {password: this.state.password} : {};
+        Object.assign(user, auto, creation);
+
+        this.props.onSubmit(user)
+      }
     }
     else {
       const user = {
@@ -65,24 +65,39 @@ export default class UsersForm extends React.Component {
     const editMode = this.props.mode === 'edit';
     const createMode = this.props.mode === 'create';
     const isDriver = this.state.selectedRole === 'drivers';
+    const isClient = this.state.selectedRole === 'clients';
 
     return (
       <form className="column col-6"
             onSubmit={this.handleSubmit}>
         {
           editMode || createMode ?
-            <div className="form-group">
-              <label className="form-label">Name</label>
-              <input
-                required={true}
-                name="name"
-                className="form-input"
-                type="text"
-                placeholder="Name"
-                onChange={this.handleChange}
-                value={this.state.name}
-              />
-            </div> :
+            isClient ?
+              <div className="form-group">
+                <label className="form-label">Phone</label>
+                <input
+                  required={true}
+                  pattern="\d{10}"
+                  name="phone"
+                  className="form-input"
+                  type="text"
+                  placeholder="Phone"
+                  onChange={this.handleChange}
+                  value={this.state.phone}
+                />
+              </div> :
+              <div className="form-group">
+                <label className="form-label">Name</label>
+                <input
+                  required={true}
+                  name="name"
+                  className="form-input"
+                  type="text"
+                  placeholder="Name"
+                  onChange={this.handleChange}
+                  value={this.state.name}
+                />
+              </div> :
             <div>
               <p>Sign up as:</p>
               <div className="form-group">
@@ -122,64 +137,63 @@ export default class UsersForm extends React.Component {
               </div>
             </div>
         }{
-          isDriver ?
-            <div className="form-group">
-              <label className="form-label">Phone</label>
-              <input
-                required={true}
-                pattern="\d{10}"
-                name="phone"
-                className="form-input"
-                type="text"
-                placeholder="Phone"
-                onChange={this.handleChange}
-                value={this.state.phone}
-              />
-            </div> :
-            <div className="form-group">
-              <label className="form-label">Email</label>
-              <input
-                required={true}
-                name="email"
-                className="form-input"
-                type="email"
-                placeholder="Email"
-                onChange={this.handleChange}
-                value={this.state.email}
-              />
-            </div>
-        }{
-          isDriver && (editMode || createMode) ?
-            <div className="form-group">
-              <label className="form-label">Auto</label>
-              <input
-                required={true}
-                name="auto"
-                className="form-input"
-                type="text"
-                placeholder="Auto"
-                onChange={this.handleChange}
-                value={this.state.auto}
-              />
-            </div>
-            :
-            null
-        }{
-          !editMode ?
-            <div className="form-group">
-              <label className="form-label">Password</label>
-              <input
-                required={true}
-                name="password"
-                className="form-input"
-                type="password"
-                placeholder="Password"
-                onChange={this.handleChange}
-                value={this.state.password}
-              />
-            </div> :
-            null
-        }
+        isDriver ?
+          <div className="form-group">
+            <label className="form-label">Phone</label>
+            <input
+              required={true}
+              pattern="\d{10}"
+              name="phone"
+              className="form-input"
+              type="text"
+              placeholder="Phone"
+              onChange={this.handleChange}
+              value={this.state.phone}
+            />
+          </div> :
+          <div className="form-group">
+            <label className="form-label">Email</label>
+            <input
+              required={!isClient}
+              name="email"
+              className="form-input"
+              type="email"
+              placeholder="Email"
+              onChange={this.handleChange}
+              value={this.state.email}
+            />
+          </div>
+      }{
+        isDriver && (editMode || createMode) ?
+          <div className="form-group">
+            <label className="form-label">Auto</label>
+            <input
+              required={true}
+              name="auto"
+              className="form-input"
+              type="text"
+              placeholder="Auto"
+              onChange={this.handleChange}
+              value={this.state.auto}
+            />
+          </div> :
+          null
+      }{
+        !editMode && !isClient ?
+          <div className="form-group">
+            <label className="form-label">Password</label>
+            <input
+              required={true}
+              name="password"
+              className="form-input"
+              type="password"
+              placeholder="Password"
+              onChange={this.handleChange}
+              value={this.state.password}
+            />
+          </div> :
+          null
+      }
         <input className="btn btn-primary" type="submit" value={this.props.entity ? 'Save' : 'Sign up'}/>
       </form>
     );

@@ -7,6 +7,7 @@ import HintMessage from '../HintMessage/HintMessage';
 import  {blank, order, existingCompleted} from '../../fixtures/orders';
 import {MESSAGES} from '../../constants/messages';
 
+
 export default class OrderPage extends React.Component {
 
   constructor() {
@@ -43,7 +44,7 @@ export default class OrderPage extends React.Component {
     }).catch((error) => {
       this.setState({
         hint: {
-          message: MESSAGES.ORDERS.ERRORS[Object.keys(error)[0]] || MESSAGES.UNEXPECTED_ERROR_MESSAGE,
+          message: MESSAGES.ERRORS[Object.keys(error)[0]] || MESSAGES.UNEXPECTED_ERROR_MESSAGE,
           type: 'danger'
         }
       });

@@ -11,7 +11,7 @@ export const ROUTES = {
     },
     GET_ITEM: {
       orders: (id) =>`${apiUrl}/orders/${id}`,
-      clients: (id) =>`${apiUrl}/admins/${id}`,
+      clients: (id) =>`${apiUrl}/admins/show_client?id=${id}`,
       drivers: (id) =>`${apiUrl}/admins/show_driver?id=${id}`,
       dispatchers: (id) => `${apiUrl}/admins/show_dispatcher?id=${id}`,
       admins: (id) =>`${apiUrl}/admins/${id}`,
@@ -21,18 +21,24 @@ export const ROUTES = {
       admins: (id) =>`${apiUrl}/admins/${id}`,
       dispatchers: (id) =>`${apiUrl}/admins/update_dispatcher?id=${id}`,
       drivers: (id) =>`${apiUrl}/admins/update_driver?id=${id}`,
+      clients: (id) => `${apiUrl}/admins/update_client?id=${id}`,
     },
     CREATE: {
-      orders: (id) =>`${apiUrl}/orders/${id}`,
-      admins: (id) =>`${apiUrl}/admins/${id}`,
+      orders: `${apiUrl}/orders`,
+      admins: `${apiUrl}/admins`,
       dispatchers: `${apiUrl}/admins/create_dispatcher`,
       drivers: `${apiUrl}/admins/create_driver`,
+      clients: `${apiUrl}/admins/create_client`,
     }
   },
   DRIVER_ROUTES: {
     ACCEPT_ORDER: (id) =>`${apiUrl}/orders/${id}/apply`,
     GET_ORDERS: `${apiUrl}/orders`,
     COMPLETE_ORDER: (id) =>`${apiUrl}/orders/${id}/complete`,
+    CANCEL_ORDER: (id) =>`${apiUrl}/orders/${id}/`,
+  },
+  DISPATCHER: {
+    CANCEL_ORDER: (id) =>`${apiUrl}/orders/${id}/cancel`,
   },
   COMMON: {
     GET_ORDER: (id) =>`${apiUrl}/orders/${id}`,

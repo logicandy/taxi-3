@@ -36,23 +36,24 @@ export default class OrderForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
     this.props.onSubmit(this.state);
   }
 
   render() {
-    const editMode = (this.props.mode === 'edit' ) || (this.props.mode === 'create');
+    const isEditMode = this.props.mode === 'edit';
     return (
       <form className="OrderForm column col-6"
             onSubmit={this.handleSubmit}>
         <div className="form-group">
           <h2>Order</h2>
           {
-            editMode ?
+            isEditMode ?
               <div>
                 <div className="form-group">
                   <label className="form-label">Client id </label>
                   <input
-                    required={true}
+                    required={false}
                     pattern="\d+"
                     name="client_id"
                     className="form-input"
@@ -127,7 +128,7 @@ export default class OrderForm extends React.Component {
           />
         </div>
         {
-          editMode ?
+          isEditMode ?
             <div>
               <div className="form-group">
                 <label className="form-label">State</label>

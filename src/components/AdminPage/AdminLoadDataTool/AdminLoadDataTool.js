@@ -1,7 +1,7 @@
 import React from 'react';
 import './AdminLoadDataTool.css';
 import TableList from '../../ItemsTable/ItemsTable';
-import AddButton from '../SingleButton/SingleButton';
+import AddButton from '../../SingleButton/SingleButton';
 import api from '../../../modules/api';
 import {browserHistory} from 'react-router';
 
@@ -42,9 +42,7 @@ export default class AdminEditTool extends React.Component {
   }
 
   handleRowClick(id) {
-    if (this.props.entityToLoad !== 'clients') {
-      browserHistory.push(`/admin/${this.props.entityToLoad}/edit/${id}`);
-    }
+    browserHistory.push(`/admin/${this.props.entityToLoad}/edit/${id}`);
   }
 
   render() {
@@ -52,23 +50,20 @@ export default class AdminEditTool extends React.Component {
     return (
       <div className="admin-edit-tool">
         <h2 className="admin-edit-tool--header">{this.props.entityToLoad}</h2>
+        <AddButton
+          isDanger={false}
+          handler={this.handleOrderAdding}
+          entity={this.props.entityToLoad}
+          text={`Add new ${role}`}
+        />
         {
-          this.props.entityToLoad === 'clients' ?
-            null :
-            <AddButton
-              isDanger={false}
-              handler={this.handleOrderAdding}
-              entity={this.props.entityToLoad}
-              text={`Add new ${role}`}
-            />
-        }{
-        this.state.entityData ?
-          <TableList
-            rowClickHandler={this.handleRowClick}
-            loadEntities={this.state.entityData}
-          /> :
-          <div className="loading"/>
-      }
+          this.state.entityData ?
+            <TableList
+              rowClickHandler={this.handleRowClick}
+              loadEntities={this.state.entityData}
+            /> :
+            <div className="loading"/>
+        }
       </div>
     );
   }

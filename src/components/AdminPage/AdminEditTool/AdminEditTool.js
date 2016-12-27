@@ -4,7 +4,7 @@ import OrderForm from '../../OrderForm/OrderForm';
 import UserForm from '../../UsersForm/UsersForm';
 import HintMessage from '../../HintMessage/HintMessage';
 import {MESSAGES} from '../../../constants/messages';
-import BlockButton from '../SingleButton/SingleButton';
+import BlockButton from '../../SingleButton/SingleButton';
 import {browserHistory} from 'react-router';
 
 
@@ -28,7 +28,12 @@ export default class AdminEditTool extends React.Component {
           entityItem: response
         });
       }).catch((error) => {
-      console.log(error);
+      this.setState({
+        hint: {
+          message: error || MESSAGES.ADMIN.ERROR,
+          type: 'danger'
+        }
+      });
     })
   }
 
@@ -45,10 +50,10 @@ export default class AdminEditTool extends React.Component {
           browserHistory.push(`/admin/${this.props.params.entity}`)
         }, 1000);
       })
-      .catch(() => {
+      .catch((error) => {
         this.setState({
           hint: {
-            message: MESSAGES.ADMIN.ERROR,
+            message: error.phone || error.email || MESSAGES.ADMIN.ERROR,
             type: 'danger'
           }
         });
@@ -65,10 +70,10 @@ export default class AdminEditTool extends React.Component {
           }
         });
       })
-      .catch(() => {
+      .catch((error) => {
         this.setState({
           hint: {
-            message: MESSAGES.ADMIN.ERROR,
+            message: error || MESSAGES.ADMIN.ERROR,
             type: 'danger'
           }
         });
@@ -95,11 +100,14 @@ export default class AdminEditTool extends React.Component {
                 onSubmit={this.handleEditSubmit}
               /> :
               <div>
-                <BlockButton
-                  handler={this.blockUser}
-                  isDanger={true}
-                  text={`Block user`}
-                />
+                {
+                  this.props.params.entity !== 'clients' &&
+                  <BlockButton
+                    handler={this.blockUser}
+                    isDanger={true}
+                    text={`Block user`}
+                  />
+                }
                 <UserForm
                   mode={'edit'}
                   entity={this.props.params.entity}

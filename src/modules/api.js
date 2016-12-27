@@ -48,6 +48,17 @@ export default {
     });
   },
 
+  driverSendCancellationRequest: (id, entity) => {
+
+  },
+
+  dispatcherCancelOrder: (id, entity) => {
+    return fetch(ROUTES.DISPATCHER.CANCEL_ORDER(id), {
+      method: 'PATCH',
+      body: entity,
+    });
+  },
+
   acceptOrderByDriver: (id) => {
     return fetch(ROUTES.DRIVER_ROUTES.ACCEPT_ORDER(id), {
       method: 'PATCH',
@@ -67,23 +78,27 @@ export default {
   },
 
   adminUpdateEntity: (entity, id, body)=> {
-    let params = {
-      method: 'put',
-      body: body,
-    };
+    let bodyToSend = body;
 
-    if (entity === 'drivers' || entity === 'dispatchers') {
-      params.body = {[entity === 'drivers' ? 'driver' : 'dispatcher']: body};
-
+    if (entity !== 'orders' && entity !== 'admins') {
+      const singleName = entity.slice(0, entity.length - 1);
+      bodyToSend = {[singleName]: body};
     }
-    return fetch(ROUTES.ADMIN_ROUTES.UPDATE[entity](id), params);
+
+    return fetch(ROUTES.ADMIN_ROUTES.UPDATE[entity](id), {
+      method: 'put',
+      body: bodyToSend,
+    });
   },
 
   adminCreateEntity: (entity, body)=> {
     let bodyToSend = body;
-    if (entity === 'drivers' || entity === 'dispatchers') {
-      bodyToSend = {[entity === 'drivers' ? 'driver' : 'dispatcher']: body};
+
+    if (entity !== 'orders') {
+      const singleName = entity.slice(0, entity.length - 1);
+      bodyToSend = {[singleName]: body};
     }
+    console.log(bodyToSend);
     return fetch(ROUTES.ADMIN_ROUTES.CREATE[entity], {
       method: 'post',
       body: bodyToSend,

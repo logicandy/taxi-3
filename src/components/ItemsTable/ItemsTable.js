@@ -23,7 +23,7 @@ export default class TableList extends React.Component {
 
     const headlines = Object.keys(this.props.loadEntities[0]);
 
-    const rowItems = this.props.loadEntities;
+    const rowItems = this.props.loadEntities.reverse();
 
     return (
       <div className="items-table">

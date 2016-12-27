@@ -2,8 +2,10 @@ import React from 'react';
 import './OrderDetails.css';
 
 export default class OrderDetails extends React.Component {
+
   constructor(props){
     super(props);
+
     this.formatDate = this.formatDate.bind(this);
   }
 

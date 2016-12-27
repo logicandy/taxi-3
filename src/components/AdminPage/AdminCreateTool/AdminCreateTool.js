@@ -21,7 +21,22 @@ export default class AdminCreateTool extends React.Component {
   }
 
   handleCreationSubmit(entity) {
-    api.adminCreateEntity(this.props.params.entity, entity)
+    let dataToSend = entity;
+    if (this.props.params.entity === 'orders') {
+      dataToSend = {
+        client: {
+          phone: entity.client_phone,
+          email: entity.email
+        },
+        order: {
+          from: entity.from,
+          to: entity.to,
+          comment: entity.comment
+        }
+      };
+    }
+
+    api.adminCreateEntity(this.props.params.entity, dataToSend)
       .then(() => {
         this.setState({
           hint: {
@@ -29,12 +44,15 @@ export default class AdminCreateTool extends React.Component {
             type: 'success'
           }
         });
-        setTimeout(() => { browserHistory.push(`/admin/${this.props.params.entity}`) }, 1000);
+        setTimeout(() => {
+          browserHistory.push(`/admin/${this.props.params.entity}`)
+        }, 1000);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
         this.setState({
           hint: {
-            message: MESSAGES.ADMIN.ERROR,
+            message: error.email || error.phone || MESSAGES.ADMIN.ERROR,
             type: 'danger'
           }
         });
