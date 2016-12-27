@@ -106,6 +106,12 @@ export default {
       method: 'post',
       body: bodyToSend,
     });
-  }
+  },
+
+  adminDestroyClient: (id) => {
+    return fetch(ROUTES.ADMIN_ROUTES.DESTROY.clients(id), {
+      method: 'post',
+    });
+  },
 };
 

@@ -29,7 +29,10 @@ export const ROUTES = {
       dispatchers: `${apiUrl}/admins/create_dispatcher`,
       drivers: `${apiUrl}/admins/create_driver`,
       clients: `${apiUrl}/admins/create_client`,
-    }
+    },
+    DESTROY: {
+      clients: (id) =>`${apiUrl}/admins/destroy_client?id=${id}`,
+    },
   },
   DRIVER_ROUTES: {
     ACCEPT_ORDER: (id) =>`${apiUrl}/orders/${id}/apply`,

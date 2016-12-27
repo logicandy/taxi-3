@@ -17,6 +17,7 @@ export default class AdminEditTool extends React.Component {
     };
 
     this.blockUser = this.blockUser.bind(this);
+    this.destroyUser = this.destroyUser.bind(this);
     this.closeHint = this.closeHint.bind(this);
     this.handleEditSubmit = this.handleEditSubmit.bind(this);
   }
@@ -80,6 +81,28 @@ export default class AdminEditTool extends React.Component {
       });
   }
 
+  destroyUser(){
+    api.adminDestroyClient(this.props.params.id)
+      .then(() => {
+        this.setState({
+          hint: {
+            message: MESSAGES.ADMIN.DESTROY,
+            type: 'success'
+          }
+        });
+        setTimeout(() => browserHistory.push(`/admin/clients/`), 1000);
+      })
+      .catch((error) => {
+        this.setState({
+          hint: {
+            message: error || MESSAGES.ADMIN.ERROR,
+            type: 'danger'
+          }
+        });
+      })
+
+  }
+
   closeHint() {
     this.setState({
       hint: null
@@ -101,12 +124,17 @@ export default class AdminEditTool extends React.Component {
               /> :
               <div>
                 {
-                  this.props.params.entity !== 'clients' &&
-                  <BlockButton
-                    handler={this.blockUser}
-                    isDanger={true}
-                    text={`Block user`}
-                  />
+                  this.props.params.entity !== 'clients' ?
+                    <BlockButton
+                      handler={this.blockUser}
+                      isDanger={true}
+                      text={`Block user`}
+                    /> :
+                    <BlockButton
+                      handler={this.destroyUser}
+                      isDanger={true}
+                      text={`Destroy user`}
+                    />
                 }
                 <UserForm
                   mode={'edit'}
