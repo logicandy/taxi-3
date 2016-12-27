@@ -3,7 +3,6 @@ function handleResponse(response) {
     if (response.ok) {
       return data;
     }
-
     throw data.error || data.errors;
   });
 }
@@ -13,7 +12,7 @@ export default function (...args) {
   const token = localStorage.getItem('auth_token');
   const defaults = {
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     }
   };
 

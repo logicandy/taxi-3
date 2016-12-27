@@ -1,13 +1,11 @@
 import React from 'react';
-import logo from '../../logo.svg';
-import './OrdersPage.css';
 import Header from '../Header/Header';
 import api from '../../modules/api';
-import OrdersList from '../OrdersList/OrdersList.js';
 import HintMessage from '../HintMessage/HintMessage.js';
+import UserForm from '../UsersForm/UsersForm';
 
 
-export default class Orders extends React.Component {
+export default class EditOrder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +13,7 @@ export default class Orders extends React.Component {
       orders: []
     };
   }
-  componentDidMount(){
+    componentDidMount(){
     api.getOrdersList().then((response) => {
       console.log(response);
       this.setState({
@@ -30,7 +28,13 @@ export default class Orders extends React.Component {
   render() {
     return (
       <div>
-      <OrdersList orders={this.state.orders} />
+      <Header text={'Edit Order'}/>
+        <input type="text" value=""></input>
+        <input type="text"></input>
+        <input type="text"></input>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
       </div>
     );
   }

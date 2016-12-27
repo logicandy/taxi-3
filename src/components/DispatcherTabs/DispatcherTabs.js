@@ -17,9 +17,9 @@ export default class DispatcherTabs extends React.Component {
   }
   componentDidMount(){
     api.getDriversList().then((response) => {
-      console.log(response.drivers);
+      console.log(response);
       this.setState({
-        drivers: response.drivers
+        drivers: response
       }
       );
     })

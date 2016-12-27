@@ -2,9 +2,9 @@ import React from 'react';
 import './OrderViewPage.css';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import {browserHistory} from 'react-router';
-import  {blank, order, existingCompleted} from '../../../fixtures/orders';
 import HintMessage from '../../HintMessage/HintMessage';
 import api from '../../../modules/api';
+import {MESSAGES} from '../../../constants/messages';
 
 
 export default class OrderViewPage extends React.Component {
@@ -16,18 +16,35 @@ export default class OrderViewPage extends React.Component {
       hint: null,
     };
 
-    this.backToOrders = this.backToOrders.bind(this);
+    this.handleLeftButton = this.handleLeftButton.bind(this);
+    this.handleRightButton = this.handleRightButton.bind(this);
     this.acceptOrder = this.acceptOrder.bind(this);
     this.closeHint = this.closeHint.bind(this);
+    this.buttonText = this.buttonText.bind(this);
   }
 
-  componentWillMount() {
-    api.getOrder(this.props.params.id)
-      .then((order) => {
-        this.setState({
-          order: order
-        });
-      })
+  componentDidMount() {
+    if (this.props.activeOrder) {
+      this.setState({
+        order: this.props.activeOrder
+      });
+    }
+    else {
+      api.getOrder(this.props.params.id)
+        .then((order) => {
+          this.setState({
+            order: order
+          });
+        })
+        .catch(() => {
+          this.setState({
+            hint: {
+              message: MESSAGES.UNEXPECTED_ERROR_MESSAGE,
+              type: 'danger'
+            }
+          });
+        })
+    }
   }
 
   acceptOrder() {
@@ -35,23 +52,47 @@ export default class OrderViewPage extends React.Component {
       .then((response) => {
         this.setState({
           hint: {
-            message: `You successfully accepted an order ${response.current_order}`,
+            message: MESSAGES.ORDERS.ACCEPT(response.current_order.id),
             type: 'success'
-          }
-        })
+          },
+        });
+        setTimeout(() => browserHistory.push('/driver/'), 1000);
       })
       .catch(() => {
         this.setState({
           hint: {
-            message: 'Something bad happened on the server',
+            message: MESSAGES.UNEXPECTED_ERROR_MESSAGE,
             type: 'danger'
           }
         });
       });
   }
 
-  backToOrders() {
-    browserHistory.push('/drivers/order');
+  handleLeftButton() {
+    if (this.props.leftButtonHandler) {
+      this.props.leftButtonHandler();
+    }
+    else {
+      browserHistory.push('/driver/');
+    }
+  }
+
+  handleRightButton() {
+    if (this.props.rightButtonHandler) {
+      this.props.rightButtonHandler();
+    }
+    else {
+      this.acceptOrder();
+    }
+  }
+
+  buttonText(button) {
+    if (this.props.buttonsText) {
+      return (button === 'left') ? this.props.buttonsText.left : this.props.buttonsText.right;
+    }
+    else {
+      return (button === 'left') ? 'Back to orders' : 'Accept order';
+    }
   }
 
   closeHint() {
@@ -71,14 +112,14 @@ export default class OrderViewPage extends React.Component {
         }
         <div className="order-view--footer">
           <button
-            onClick={this.backToOrders}
-            className="btn order-view--back-button">
-            Back to orders
+            onClick={this.handleLeftButton}
+            className="btn order-view--left-button">
+            {this.buttonText('left')}
           </button>
           <button
-            onClick={this.acceptOrder}
-            className="btn btn-primary order-view--accept-button">
-            Accept order
+            onClick={this.handleRightButton}
+            className="btn order-view--right-button">
+            {this.buttonText('right')}
           </button>
         </div>
         {

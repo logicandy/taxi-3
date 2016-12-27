@@ -7,27 +7,22 @@ export default class OrderForm extends React.Component {
     super(props);
     this.state = {
       client_id: this.props.order.client_id ?
-        this.props.order.client_id :
-        '',
+        this.props.order.client_id : '',
       driver_id: this.props.order.driver_id ?
-        this.props.order.driver_id :
-        '',
+        this.props.order.driver_id : '',
       from: this.props.order.from ?
-        this.props.order.from :
-        '',
+        this.props.order.from : '',
       to: this.props.order.to ?
-        this.props.order.to :
-        '',
+        this.props.order.to : '',
       price: this.props.order.price ?
-        this.props.order.price :
-        '',
+        this.props.order.price : '',
       email: this.props.order.email ?
-        this.props.order.email :
-        '',
+        this.props.order.email : '',
       state: this.props.order.state,
       comment: this.props.order.comment ?
-        this.props.order.comment :
-        ''
+        this.props.order.comment : '',
+      client_phone: this.props.order.client_phone ?
+        this.props.order.client_phone : '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -41,26 +36,60 @@ export default class OrderForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
     this.props.onSubmit(this.state);
   }
 
   render() {
-    const isModifiedMode = Boolean(this.state.price) || Boolean(this.state.driver_id);
+    const isEditMode = this.props.mode === 'edit';
     return (
       <form className="OrderForm column col-6"
             onSubmit={this.handleSubmit}>
         <div className="form-group">
           <h2>Order</h2>
+          {
+            isEditMode ?
+              <div>
+                <div className="form-group">
+                  <label className="form-label">Client id </label>
+                  <input
+                    required={false}
+                    pattern="\d+"
+                    name="client_id"
+                    className="form-input"
+                    type="text"
+                    placeholder="Client id"
+                    onChange={this.handleChange}
+                    value={this.state.client_id}
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">Driver id </label>
+                  <input
+                    required={false}
+                    pattern="\d+"
+                    name="driver_id"
+                    className="form-input"
+                    type="text"
+                    placeholder="Driver id"
+                    onChange={this.handleChange}
+                    value={this.state.driver_id}
+                  />
+                </div>
+              </div>
+              :
+              null
+          }
           <label className="form-label">Client Phone</label>
           <input
             required={true}
-            pattern="\d+"
-            name="client_id"
+            pattern="\d{10}"
+            name="client_phone"
             className="form-input"
             type="text"
             placeholder="Client Phone"
             onChange={this.handleChange}
-            value={this.state.client_id}
+            value={this.state.client_phone}
           />
         </div>
         <div className="form-group">
@@ -74,24 +103,6 @@ export default class OrderForm extends React.Component {
             value={this.state.email}
           />
         </div>
-        {
-          isModifiedMode ?
-            <div className="form-group">
-              <label className="form-label">Driver`s name </label>
-              <input
-                required={true}
-                pattern="^[a-zA-ZА-Яа-яЁёЇї\s]*$"
-                name="driver_id"
-                className="form-input"
-                type="text"
-                placeholder="Driver`s Name"
-                onChange={this.handleChange}
-                value={this.state.driver_id}
-              />
-            </div>
-            :
-            null
-        }
         <div className="form-group">
           <label className="form-label">From</label>
           <input
@@ -117,35 +128,19 @@ export default class OrderForm extends React.Component {
           />
         </div>
         {
-          isModifiedMode ?
+          isEditMode ?
             <div>
               <div className="form-group">
-                <label className="form-label">Price &#8372;</label>
+                <label className="form-label">State</label>
                 <input
                   required={true}
-                  pattern="[(0-9)+.?(0-9)*]+"
-                  name="price"
+                  name="state"
                   className="form-input"
                   type="text"
-                  placeholder="Price"
+                  placeholder="State"
                   onChange={this.handleChange}
-                  value={this.state.price}
+                  value={this.state.state}
                 />
-              </div>
-              <div className="form-group">
-                <label className="form-checkbox">
-                  <input
-                    required={true}
-                    disabled={true}
-                    name="state"
-                    type="checkbox"
-                    onChange={this.handleChange}
-                    value={this.state.state}
-                    checked={this.state.state}
-                  />
-                  <i className="form-icon">
-                  </i> Completed
-                </label>
               </div>
             </div> :
             null

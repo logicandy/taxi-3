@@ -1,0 +1,9 @@
+.admin-panel--result-block {
+  margin: 0 auto;
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.admin-panel--result-block form {
+  text-align: left;
+}

@@ -3,16 +3,20 @@
   margin: 1rem auto;
 }
 
-.order-view--back-button {
+.btn.order-view--left-button {
   margin-right: 1rem;
+  background: rgb(232, 86, 0);
+  border-color: rgba(0, 0, 0, 0);
+  color: #fff;
 }
 
-.order-view--accept-button,
-.order-view--back-button {
+.order-view--right-button,
+.btn.order-view--left-button {
   margin-bottom: 1rem;
 }
 
-.order-view--back-button:hover {
-  color: #fff;
+.btn.order-view--left-button:hover {
+  background: rgb(244, 95, 0);
+  border-color: rgba(0, 0, 0, 0);
 }
 

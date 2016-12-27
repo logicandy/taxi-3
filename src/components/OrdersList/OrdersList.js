@@ -1,5 +1,8 @@
 import React from 'react';
-import '../OrdersPage/OrdersPage.css';
+import './OrdersList.css';
+//import {ordersArray}  from '../../fixtures/orders.js';
+import { Link } from 'react-router';
+
 
 export default class OrdersList extends React.Component {
 

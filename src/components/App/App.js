@@ -1,5 +1,5 @@
 import React from 'react';
-import RouterConfig from '../../config/RouterConfig';
+import RouterConfig from '../../config/routerConfig';
 import './../../../node_modules/spectre.css/dist/spectre.css';
 import './App.css';
 

@@ -9,7 +9,14 @@
   visibility: hidden;
 }
 
-.hint .modal-container {
+.hint .modal-container{
   background: rgba(0, 0, 0, 0);
   box-shadow: none;
+}
+.hint .modal-container{
+  position: absolute;
+  top: 2rem;
+}
+.modal.active.hint{
+  height: 12rem;
 }
