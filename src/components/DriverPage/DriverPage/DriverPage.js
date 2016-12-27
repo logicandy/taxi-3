@@ -25,6 +25,7 @@ export default class DriverPage extends React.Component {
     this.cancelButtonVisibilityHandler = this.cancelButtonVisibilityHandler.bind(this);
     this.completeOrderHandler = this.completeOrderHandler.bind(this);
     this.viewItem = this.viewItem.bind(this);
+    this.closeHint = this.closeHint.bind(this);
   }
 
   componentDidMount() {
@@ -32,7 +33,7 @@ export default class DriverPage extends React.Component {
       .then((response) => {
 
         const currentDriverId = response.driver_id;
-        let activeOrder = {};
+        let activeOrder = null;
         let driverOrders = [];
 
         response.orders.forEach((item) => {
@@ -49,9 +50,6 @@ export default class DriverPage extends React.Component {
           }
         });
 
-        console.log(activeOrder);
-        console.log(driverOrders);
-
         this.setState({
           orders: driverOrders,
           activeOrder: activeOrder,
@@ -62,7 +60,7 @@ export default class DriverPage extends React.Component {
         this.setState({
           hint: {
             message: MESSAGES.UNEXPECTED_ERROR_MESSAGE,
-            type: 'danger'
+            type: 'danger',
           }
         });
       });
@@ -74,7 +72,7 @@ export default class DriverPage extends React.Component {
 
   closeHint() {
     this.setState({
-      hint: null
+      hint: null,
     });
   }
 
@@ -96,8 +94,8 @@ export default class DriverPage extends React.Component {
         this.setState({
           hint: {
             message: MESSAGES.UNEXPECTED_ERROR_MESSAGE,
-            type: 'danger'
-          }
+            type: 'danger',
+          },
         });
       });
   }
@@ -105,22 +103,26 @@ export default class DriverPage extends React.Component {
   sendCancellationRequest(request) {
     api.driverSendCancellationRequest(this.state.activeOrder.id, request)
       .then(() => {
-        console.log('ok');
+        this.setState({
+          hint: {
+            message: MESSAGES.ORDERS.CANCELED,
+            type: 'success',
+          },
+          cancellationForm: !this.state.cancellationForm,
+
+        });
       })
       .catch(() => {
         this.setState({
           hint: {
             message: MESSAGES.UNEXPECTED_ERROR_MESSAGE,
-            type: 'danger'
-          }
+            type: 'danger',
+          },
         });
       });
   }
 
   render() {
-
-
-    console.log(this.state.activeOrder);
     return (
       <div>
         <Header
