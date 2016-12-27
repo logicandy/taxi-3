@@ -17,10 +17,8 @@ export default class DriverPage extends React.Component {
     this.state = {
       hint: null,
       orders: null,
-      activeOrder: {
-        cancellationForm: false,
-        orderData: null,
-      },
+      activeOrder: null,
+      cancellationForm: false,
     };
 
     this.sendCancellationRequest = this.sendCancellationRequest.bind(this);
@@ -32,27 +30,33 @@ export default class DriverPage extends React.Component {
   componentDidMount() {
     api.driverGetOrders()
       .then((response) => {
+
         const currentDriverId = response.driver_id;
-        const driverOrders = response.orders.map((item)=> {
+        let activeOrder = {};
+        let driverOrders = [];
+
+        response.orders.forEach((item) => {
           if (item.driver_id === currentDriverId && item.state === 'active') {
-            this.setState({
-              cancellationForm: false,
-              activeOrder: {
-                orderData: item
-              }
-            })
+            activeOrder = item;
           }
-          return Object.assign({}, {
-            id: item.id,
-            from: item.from,
-            to: item.to,
-            comment: item.comment,
-          })
+          if (item.state === 'waiting') {
+            driverOrders.push(Object.assign({}, {
+              id: item.id,
+              from: item.from,
+              to: item.to,
+              comment: item.comment,
+            }));
+          }
         });
 
+        console.log(activeOrder);
+        console.log(driverOrders);
+
         this.setState({
-          orders: driverOrders
+          orders: driverOrders,
+          activeOrder: activeOrder,
         })
+
       })
       .catch(() => {
         this.setState({
@@ -76,10 +80,8 @@ export default class DriverPage extends React.Component {
 
   cancelButtonVisibilityHandler() {
     this.setState({
-      activeOrder: {
-        cancellationForm: !this.state.activeOrder.cancellationForm,
-        orderData: this.state.activeOrder.orderData,
-      }
+      cancellationForm: !this.state.cancellationForm,
+      orderData: this.state.activeOrder,
     })
   }
 
@@ -101,8 +103,7 @@ export default class DriverPage extends React.Component {
   }
 
   sendCancellationRequest(request) {
-    console.log(request);
-    api.driverSendCancellationRequest(this.state.activeOrder.orderData.id, request)
+    api.driverSendCancellationRequest(this.state.activeOrder.id, request)
       .then(() => {
         console.log('ok');
       })
@@ -117,22 +118,25 @@ export default class DriverPage extends React.Component {
   }
 
   render() {
+
+
+    console.log(this.state.activeOrder);
     return (
       <div>
         <Header
           text={'Driver page'}
         />
         {
-          this.state.activeOrder.orderData ?
+          this.state.activeOrder !== null ?
             <div>
               <OrderView
-                activeOrder={this.state.activeOrder.orderData}
+                activeOrder={this.state.activeOrder}
                 rightButtonHandler={this.completeOrderHandler}
                 leftButtonHandler={this.cancelButtonVisibilityHandler}
                 buttonsText={{left: 'Cancel order', right: 'Complete order'}}
               />
               {
-                this.state.activeOrder.cancellationForm &&
+                this.state.cancellationForm &&
                 <CancellationForm
                   handleSubmit={this.sendCancellationRequest}
                 />

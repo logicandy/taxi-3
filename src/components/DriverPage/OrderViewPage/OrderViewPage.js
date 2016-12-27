@@ -114,12 +114,12 @@ export default class OrderViewPage extends React.Component {
           <button
             onClick={this.handleLeftButton}
             className="btn order-view--left-button">
-            {this.buttonText('left')}
+          <span> {this.buttonText('left')}</span>
           </button>
           <button
             onClick={this.handleRightButton}
             className="btn order-view--right-button">
-            {this.buttonText('right')}
+           <span> {this.buttonText('right')}</span>
           </button>
         </div>
         {

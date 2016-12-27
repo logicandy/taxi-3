@@ -49,7 +49,10 @@ export default {
   },
 
   driverSendCancellationRequest: (id, entity) => {
-
+    return fetch(ROUTES.DRIVER_ROUTES.CANCEL_ORDER(id), {
+      method: 'put',
+      body: entity,
+    });
   },
 
   dispatcherCancelOrder: (id, entity) => {

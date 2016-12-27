@@ -35,7 +35,7 @@ export const ROUTES = {
     ACCEPT_ORDER: (id) =>`${apiUrl}/orders/${id}/apply`,
     GET_ORDERS: `${apiUrl}/orders`,
     COMPLETE_ORDER: (id) =>`${apiUrl}/orders/${id}/complete`,
-    CANCEL_ORDER: (id) =>`${apiUrl}/orders/${id}/`,
+    CANCEL_ORDER: (id) =>`${apiUrl}/orders/cancel_request?id=${id}`,
   },
   DISPATCHER: {
     CANCEL_ORDER: (id) =>`${apiUrl}/orders/${id}/cancel`,

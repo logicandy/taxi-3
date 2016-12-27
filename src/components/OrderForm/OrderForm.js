@@ -129,19 +129,18 @@ export default class OrderForm extends React.Component {
         </div>
         {
           isEditMode ?
-            <div>
-              <div className="form-group">
-                <label className="form-label">State</label>
-                <input
-                  required={true}
-                  name="state"
-                  className="form-input"
-                  type="text"
-                  placeholder="State"
-                  onChange={this.handleChange}
-                  value={this.state.state}
-                />
-              </div>
+            <div className="form-group">
+              <select
+                name="state"
+                className="form-select select-sm"
+                value={this.state.state}
+                onChange={this.handleChange}
+              >
+                <option>active</option>
+                <option>waiting</option>
+                <option>completed</option>
+                <option>canceled</option>
+              </select>
             </div> :
             null
         }
